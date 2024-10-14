@@ -15,6 +15,11 @@ public class AppInfo {
         this.size = size;
     }
 
+    public AppInfo(String appName, String packageName) {
+        this.appName = appName;
+        this.packageName = packageName;
+    }
+
     public String getAppName() {
         return appName;
     }

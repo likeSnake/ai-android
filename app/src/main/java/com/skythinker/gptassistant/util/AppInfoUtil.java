@@ -2,7 +2,6 @@ package com.skythinker.gptassistant.util;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppInfoUtil {
+    private static ArrayList<AppInfo> appInfos;
     public static Drawable getAppIcon(Context context, String pkgName) {
         try {
             if (null != pkgName) {
@@ -46,11 +46,16 @@ public class AppInfoUtil {
 
 
 
-    public static void getAppListAsync(Context context, final AppListListener listener) {
+    // 初始化获取包名+应用名
+    public static void initAppListAsync(Context context) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                ArrayList<AppInfo> appInfos = new ArrayList<>();
+                if (appInfos == null){
+                    appInfos = new ArrayList<>();
+                }else {
+                    return;
+                }
                 PackageManager packageManager = context.getPackageManager();
                 List<ApplicationInfo> apps = packageManager.getInstalledApplications(0);
 
@@ -62,28 +67,32 @@ public class AppInfoUtil {
 
                     String appName = app.loadLabel(packageManager).toString();
                     String packageName = app.packageName;
-                    Drawable icon = app.loadIcon(packageManager);
+                    //Drawable icon = app.loadIcon(packageManager);
                     long appSize = 1;
 
-                    try {
+                   /* try {
                         // 获取应用大小
                         PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 0);
                         appSize = packageInfo.applicationInfo.sourceDir.length();
                     } catch (PackageManager.NameNotFoundException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                     System.out.println("应用程序名称：" + appName);
                     System.out.println("应用程序包名：" + packageName);
-                    System.out.println("应用程序大小：" + appSize);
-                    byte[] bytes = getDrawableByte(icon);
+                    //System.out.println("应用程序大小：" + appSize);
+                    //byte[] bytes = getDrawableByte(icon);
 
-                    appInfos.add(new AppInfo(appName, bytes, packageName,appSize));
+                    appInfos.add(new AppInfo(appName, packageName));
                 }
 
                 // Notify the listener with the app list
-                listener.onAppListFetched(appInfos);
+                //listener.onAppListFetched(appInfos);
             }
         }).start();
+    }
+
+    public ArrayList<AppInfo> getAppInfos(){
+            return appInfos;
     }
 
     public interface AppListListener {

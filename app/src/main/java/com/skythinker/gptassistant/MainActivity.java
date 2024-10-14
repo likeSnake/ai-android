@@ -1,5 +1,7 @@
 package com.skythinker.gptassistant;
 
+import static com.skythinker.gptassistant.util.AppInfoUtil.initAppListAsync;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,13 +16,11 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.PaintDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
@@ -652,6 +652,9 @@ public class MainActivity extends Activity {
                     .show();
             }
         }
+
+        initAppListAsync(this);
+
     }
 
     // 设置当前使用的语音识别接口
