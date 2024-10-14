@@ -1,0 +1,131 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--  帮助说明  -->
+    <string name="help_msg">
+        以下为本软件的简要操作说明，详细说明可以在项目主页中查看。\n\n
+        本软件为基于ChatGPT的助理软件，用户可以预设问题模板，并通过桌面图标或通知栏快捷按钮进入提问界面。\n\n
+        用户需要在设置中填写OpenAI API的服务地址和自己的API_Key，可填入官方服务参数或各种国内中转服务商参数。\n\n
+        若需使用语音助手功能，须开启无障碍服务，并允许程序后台运行。此后在任何界面长按音量下键可唤出应用，保持按下并对麦克风说话，松开时就会自动录入识别出的文字。在松开后的3秒内再次短按音量下键，即可直接发送问题。\n\n
+        软件默认使用内置的华为HMS语音识别接口，用户也可更换为百度、谷歌、Whisper语音接口，具体说明请参考项目主页。\n\n
+        联网功能开启后软件会将GPT所要求的网页内容返回给GPT，以提高回答准确性。访问网络会极大增加Token消耗，GPT4模型请慎用。\n\n
+        注意：若长按音量键后手机震动但不弹出界面，请手动在设置中允许后台弹出界面权限。
+    </string>
+    <!--  软件界面字符串  -->
+    <string name="conf_tab_list_title">模板设置</string>
+    <string name="conf_tab_list_subtitle">| 长按拖动排序，左滑删除</string>
+    <string name="conf_openai_title">OpenAI 设置</string>
+    <string name="conf_opanai_key_item">Key</string>
+    <string name="conf_openai_host_item">网址</string>
+    <string name="conf_model_select_item">选用模型</string>
+    <string name="conf_custom_model_item">自定义模型</string>
+    <string name="conf_custom_model_tip">用分号隔开多个模型</string>
+    <string name="conf_asr_title">语音识别设置</string>
+    <string name="conf_asr_subtitle">| 关闭下述接口则使用内置华为接口</string>
+    <string name="conf_use_baidu_asr_item">使用百度接口</string>
+    <string name="conf_baidu_appid_item">AppID</string>
+    <string name="conf_baidu_apikey_item">ApiKey</string>
+    <string name="conf_baidu_secret_item">Secret</string>
+    <string name="conf_baidu_realtime_item">启用长语音</string>
+    <string name="conf_use_whisper_asr_item">使用Whisper接口</string>
+    <string name="conf_use_google_asr_item">使用谷歌接口</string>
+    <string name="conf_network_title">联网设置</string>
+    <string name="conf_enable_network_item">启用网络访问</string>
+    <string name="conf_enable_network_tip">开启会大幅增加Token用量</string>
+    <string name="conf_web_max_char_item">单网页最大字符数</string>
+    <string name="conf_web_max_char_tip">丢弃超出的字符以缩减Token</string>
+    <string name="conf_only_latest_web_item">仅发送最新数据</string>
+    <string name="conf_only_latest_web_tip">丢弃上方对话的网络数据以缩减Token</string>
+    <string name="conf_others_title">其他选项</string>
+    <string name="conf_set_access_item">设置无障碍模式</string>
+    <string name="conf_startup_check_access_item">启动时检查无障碍</string>
+    <string name="conf_set_tts_item">打开系统语音设置</string>
+    <string name="conf_tts_enable_item">默认启用语音</string>
+    <string name="conf_tts_enable_tip">设置应用启动时是否开启语音播报</string>
+    <string name="conf_def_enable_chat_item">默认启用对话</string>
+    <string name="conf_def_enable_chat_tip">设置应用启动时是否开启连续对话</string>
+    <string name="conf_remember_tab_item">记住选用的模板</string>
+    <string name="conf_remember_tab_tip">应用启动时自动选中上次使用的模板</string>
+    <string name="conf_auto_save_history_item">自动保存对话</string>
+    <string name="conf_auto_save_history_tip">新建对话时保存当前对话到历史记录</string>
+    <string name="conf_limit_vision_size_item">发送图片大小限制</string>
+    <string name="conf_limit_vision_size_tip">开:2048x512 关:2048x2048</string>
+    <string name="conf_help_item">查看帮助</string>
+    <string name="conf_check_update_item">查看更新</string>
+    <string name="conf_check_update_tip_empty">当前版本：0.0.0</string>
+    <string name="conf_homepage_item">项目主页</string>
+    <string name="conf_homepage_tip">2024 @skythinker - 欢迎点个Star哦~</string>
+    <string name="default_greeting">您好！请问我能为您提供什么帮助？</string>
+    <string name="conf_activity_title">设置</string>
+    <string name="history_activity_title">历史记录</string>
+    <string name="history_search_hint">搜索对话标题</string>
+    <string name="dialog_clear_history">确定要清空所有历史记录吗？\n（左滑可删除单条记录）</string>
+    <string name="tab_detail_activity_title">模板设置</string>
+    <string name="tab_detail_cancel_text">取消</string>
+    <string name="tab_detail_confirm_text">确定</string>
+    <string name="tab_detail_title_hint">在这里输入模板标题</string>
+    <string name="tab_detail_content_hint">在这里输入模板内容（右上角可以获取在线模板和编写说明哦）</string>
+    <string name="confirm_dialog_default_title">提示</string>
+    <string name="confirm_dialog_default_cancel_text">取消</string>
+    <string name="confirm_dialog_default_ok_text">确定</string>
+    <string name="img_dialog_form_camera">使用相机拍照</string>
+    <string name="img_dialog_from_album">从相册选择</string>
+    <string name="img_dialog_cancel">取消</string>
+    <string name="img_preview_title">图片预览</string>
+    <string name="img_preview_cancel">返回</string>
+    <string name="img_preview_delete">移除</string>
+    <string name="img_preview_reselect">重选</string>
+    <string name="toast_use_vision_model">请选择支持vision的模型以发送图片</string>
+    <string name="text_ref_web_prefix">"参考网页: "</string>
+    <string name="text_gpt_error_prefix">"获取失败: "</string>
+    <string name="text_visiting_web_prefix">"正在访问: "</string>
+    <string name="text_cancel_web">已取消访问网页。</string>
+    <string name="text_asr_error_prefix">"语音识别出错: "</string>
+    <string name="text_input_hint">长按输入语音或清除文本</string>
+    <string name="text_listening_hint">正在聆听...</string>
+    <string name="text_access_notice">请前往开启无障碍服务</string>
+    <string name="toast_access_error">无障碍服务未开启，无法使用音量键控制</string>
+    <string name="toast_clipboard">已复制到剪贴板</string>
+    <string name="toast_code_clipboard">代码块已复制到剪贴板</string>
+    <string name="text_waiting_reply">正在等待回复...</string>
+    <string name="toast_enable_network">提醒：访问网络时会大幅增加token用量，GPT4请谨慎使用！</string>
+    <string name="dialog_help_title">帮助</string>
+    <string name="dialog_help_cancel">返回</string>
+    <string name="format_version_latest">当前版本：%s · 已是最新版本</string>
+    <string name="format_version_available">有可用更新：%s -> %s</string>
+    <string name="format_version_normal">当前版本：%s</string>
+    <string name="homepage_url">https://gitee.com/skythinker/gpt-assistant-android</string>
+    <string name="release_url">https://gitee.com/skythinker/gpt-assistant-android/releases</string>
+    <string name="check_update_url">https://gitee.com/api/v5/repos/skythinker/gpt-assistant-android/releases/latest</string>
+    <string name="new_discussion_url">https://github.com/Skythinker616/gpt-assistant-android/discussions/new?category=templates</string>
+    <string name="discussions_url">https://github.com/Skythinker616/gpt-assistant-android/discussions/categories/templates</string>
+    <string name="shared_templates_url">https://gitee.com/skythinker/gpt-assistant-android/raw/master/static_res/shared_templates.json</string>
+    <string name="template_help_url">https://gitee.com/skythinker/gpt-assistant-android/blob/master/template_help.md</string>
+    <string name="text_default_tab_title">问答</string>
+    <string name="text_default_tab_content">请回答这个问题：</string>
+    <string name="text_gpt_cancel">请求已取消</string>
+    <string name="text_gpt_timeout">请求超时</string>
+    <string name="text_gpt_unknown_error">未知错误</string>
+    <string name="online_temp_activity_title">在线模板</string>
+    <string name="text_online_temp_notice">| 触摸查看详情，右滑获取到本地</string>
+    <string name="text_online_temp_loading">正在加载...</string>
+    <string name="text_online_temp_error">网络错误</string>
+    <string name="dialog_download_google">未安装Google搜索，是否前往下载？（请确保允许其录音权限）</string>
+    <string name="text_google_asr_unavailable">Google 语音识别服务不可用</string>
+    <string name="dialog_asr_select_help">中国大陆：推荐使用华为（免费）或百度（付费）接口\n\n海外使用：可以使用谷歌（免费）或Whisper（付费）接口</string>
+    <string name="dialog_asr_select_help_title">语音识别选用说明</string>
+    <string name="text_whisper_param_error">请检查OpenAI接口参数配置</string>
+    <string name="text_google_asr_typing_error">请设置Google为语音输入引擎</string>
+    <string name="text_google_asr_permission_error">请在系统设置中允许Google的录音权限</string>
+    <string name="text_hms_asr_failed_error">\n可能由于作者关闭了免费HMS语音服务，或在新版本中更新了参数，若该错误持续发生，请尝试更新版本或使用其他语音识别接口</string>
+    <string name="text_copy_code_notice">点击以复制</string>
+    <string name="text_hms_asr_unsupported">华为语音识别接口不支持x86架构，请选用其他识别接口</string>
+    <string name="toast_multi_chat_on">多轮对话模式</string>
+    <string name="toast_multi_chat_off">单次对话模式</string>
+    <string name="toast_tts_on">语音播报已开启</string>
+    <string name="toast_tts_off">语音播报已关闭</string>
+    <string name="toast_multi_voice_on">进入连续语音对话</string>
+    <string name="toast_multi_voice_off">连续语音对话已退出</string>
+    <string name="toast_voice_chat_tts_off">请先打开语音播报开关</string>
+    <string name="dialog_custom_model_help_title">自定义模型说明</string>
+    <string name="dialog_custom_model_help">可输入多个自定义模型名称，自定义模型也会显示在下拉列表中\n\n多个模型通过英文分号分隔，可在模型结尾添加星号表示支持识图功能\n\n示例：gpt-4o*;gpt-4-0613</string>
+    <string name="text_gpt_conf_error">GPT客户端错误，请检查API配置</string>
+</resources>
