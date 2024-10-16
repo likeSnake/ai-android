@@ -139,4 +139,5 @@
     <string name="dialog_custom_model_help_title">Custom Model Help</string>
     <string name="dialog_custom_model_help">Custom model names entered here will be appended to drop-down list. Use \';\' to separate different models and use \'*\' to indicate a vision model. \n\nExample: gpt-4o*;gpt-4-0613</string>
     <string name="text_gpt_conf_error">Please check GPT api configuration</string>
+
 </resources>

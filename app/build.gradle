@@ -14,6 +14,11 @@ android {
         versionName "1.11.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            ndkVersion = "24.0.8215888"
+            //设置支持的SO库架构
+            abiFilters 'armeabi-v7a', 'arm64-v8a'// 'armeabi', 'x86_64',
+        }
     }
     buildTypes {
         release {
@@ -26,7 +31,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     packagingOptions {
-        resources.excludes.add('META-INF/INDEX.LIST')
+        exclude 'META-INF/INDEX.LIST'
     }
     lintOptions {
         abortOnError false
@@ -60,4 +65,7 @@ dependencies {
     annotationProcessor 'io.noties:prism4j-bundler:2.0.0'
     implementation group: 'com.unfbx', name: 'chatgpt-java', version: '1.1.5'
     implementation 'com.huawei.hms:ml-computer-voice-asr:3.12.0.301'
+
+   // implementation 'com.google.code.gson:gson:2.10.1'
+
 }

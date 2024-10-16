@@ -1111,6 +1111,8 @@ public class MainActivity extends Activity {
 
         // 处理提问文本内容
         String userInput = (input == null) ? etUserInput.getText().toString() : input;
+
+
         if(multiChatList.size() == 0 && input == null) { // 由用户输入触发的第一次对话需要添加模板内容
             PromptTabData tabData = GlobalDataHolder.getTabDataList().get(selectedTab);
             String template = tabData.getFormattedPrompt(getTemplateParamsFromView());
