@@ -1,9 +1,12 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.entity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 import android.util.Log;
+
+import com.skythinker.gptassistant.util.PromptTabData;
+import com.skythinker.gptassistant.R;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -38,6 +41,13 @@ public class GlobalDataHolder {
     private static boolean autoSaveHistory;
     private static SharedPreferences sp = null;
 
+    public static List<String> startAppKey = new ArrayList<>();
+
+    public static void loadStartKey(){
+        startAppKey.add("打开");
+        startAppKey.add("启动");
+    }
+
     public static void init(Context context) {
         sp = context.getSharedPreferences("gpt_assistant", Context.MODE_PRIVATE);
         loadTabDataList();
@@ -55,6 +65,11 @@ public class GlobalDataHolder {
         loadFunctionSetting();
         loadVisionSetting();
         loadHistorySetting();
+        loadStartKey();
+    }
+
+    public static List<String> getStartAppKey(){
+        return startAppKey;
     }
 
     public static List<PromptTabData> getTabDataList() {

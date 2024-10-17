@@ -1,4 +1,4 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.MyService;
 
 import android.content.Intent;
 import android.service.quicksettings.TileService;
@@ -7,6 +7,8 @@ import android.util.Log;
 import android.os.Handler;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.skythinker.gptassistant.activity.MainActivity;
 
 public class QuickStartService extends TileService {
     @Override

@@ -1,6 +1,5 @@
 package com.skythinker.gptassistant.entity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +9,5 @@ import java.util.List;
  * @date: 2024/10/15
  */
 public class StringKeyWord {
-    List<String> appName = new ArrayList<>();
 
 }

@@ -1,11 +1,12 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.MyInterface;
 
 import android.content.Context;
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.annotation.Nullable;
 
+import com.skythinker.gptassistant.util.GlobalUtils;
+import com.skythinker.gptassistant.R;
 import com.unfbx.chatgpt.OpenAiStreamClient;
 import com.unfbx.chatgpt.entity.chat.BaseChatCompletion;
 import com.unfbx.chatgpt.entity.chat.ChatCompletionWithPicture;
@@ -18,7 +19,6 @@ import com.unfbx.chatgpt.entity.chat.ChatCompletion;
 import com.unfbx.chatgpt.entity.chat.MessagePicture;
 import com.unfbx.chatgpt.entity.chat.Parameters;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,9 +32,8 @@ import okhttp3.internal.http2.StreamResetException;
 import okhttp3.sse.EventSource;
 import okhttp3.sse.EventSourceListener;
 
-import com.skythinker.gptassistant.ChatManager.ChatMessage.ChatRole;
-import com.skythinker.gptassistant.ChatManager.ChatMessage;
-import com.unfbx.chatgpt.entity.whisper.WhisperResponse;
+import com.skythinker.gptassistant.util.ChatManager.ChatMessage.ChatRole;
+import com.skythinker.gptassistant.util.ChatManager.ChatMessage;
 
 public class ChatApiClient {
     // 消息回调接口

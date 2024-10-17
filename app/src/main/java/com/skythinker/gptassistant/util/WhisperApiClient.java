@@ -1,7 +1,8 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.util;
 
 import android.content.Context;
 
+import com.skythinker.gptassistant.R;
 import com.unfbx.chatgpt.OpenAiClient;
 import com.unfbx.chatgpt.entity.whisper.WhisperResponse;
 

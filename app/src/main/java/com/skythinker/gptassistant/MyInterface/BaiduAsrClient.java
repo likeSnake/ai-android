@@ -1,4 +1,4 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.MyInterface;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,6 +7,7 @@ import com.baidu.speech.EventListener;
 import com.baidu.speech.EventManager;
 import com.baidu.speech.EventManagerFactory;
 import com.baidu.speech.asr.SpeechConstant;
+import com.skythinker.gptassistant.entity.GlobalDataHolder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,7 +15,7 @@ import org.json.JSONObject;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class BaiduAsrClient extends AsrClientBase{
+public class BaiduAsrClient extends AsrClientBase {
     private EventManager asr = null;
     String asrBuffer = "";
     IAsrCallback callback = null;

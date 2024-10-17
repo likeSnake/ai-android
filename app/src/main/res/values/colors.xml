@@ -7,7 +7,24 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="transparent">#00FFFFFF</color>
     <color name="tag_background_selected">#81C784</color>
     <color name="tag_background_unselected">#C8E6C9</color>
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="bgColor">#B7EED4</color>
+    <color name="color1">#FE645A</color>
+    <color name="color2">#169C2D</color>
+    <color name="color3">#FEB043</color>
+
+
+    <color name="navigation_bar_color">#FF018786</color>
+    <color name="navigation_icon_color">#F44336</color>
+
+    <!--透明-->
+    <color name="transparent">#00000000</color>
+    <!--半透明-->
+    <color name="translucent">#22050505</color>
+    <color name="my_colors">#00ffffff</color>
 </resources>

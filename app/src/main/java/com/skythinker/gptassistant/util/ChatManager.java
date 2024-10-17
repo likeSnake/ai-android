@@ -1,4 +1,4 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.util;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -7,9 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Base64;
-import android.util.Log;
-
-import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import cn.hutool.crypto.digest.MD5;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 

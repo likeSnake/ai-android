@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.skythinker.gptassistant">
+    package="com.skythinker.gptassistant" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
-
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
 
     <queries>
@@ -27,79 +26,94 @@
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".App"
+        android:extractNativeLibs="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar"
-        android:extractNativeLibs="true"
-        android:networkSecurityConfig="@xml/network_security_config">
+        android:theme="@style/Theme.ai" >
+
         <service
-            android:name=".MyAccessbilityService"
+            android:name=".util.MyAccessbilityService"
             android:enabled="true"
             android:exported="true"
             android:label="@string/accessibility_service_label"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
+
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
         </service>
-
-        <service android:name=".QuickStartService"
-            android:label="GPT"
-            android:icon="@drawable/tile_icon"
+        <service
+            android:name=".MyService.QuickStartService"
             android:description="@string/app_name"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:exported="true"
+            android:icon="@drawable/tile_icon"
+            android:label="GPT"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE" >
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
 
         <activity
-            android:name=".TabDetailConfActivity"
+            android:name=".activity.TabDetailConfActivity"
             android:exported="false" />
         <activity
-            android:name=".TabConfActivity"
-            android:exported="true" />
-        <activity
-            android:name=".HistoryActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".OnlineTemplatesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:launchMode="singleTask">
+            android:name=".activity.StartActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter
-                android:label="询问 GPT">
+        </activity>
+
+        <activity
+            android:name=".activity.TabConfActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.OnlineTemplatesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateVisible|adjustResize" >
+
+            <intent-filter android:label="询问 GPT" >
                 <action android:name="android.intent.action.PROCESS_TEXT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
-            <intent-filter
-                android:label="发送到Vision">
+            <intent-filter android:label="发送到Vision" >
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="image/*" />
             </intent-filter>
-            <intent-filter
-                android:label="询问GPT">
+            <intent-filter android:label="询问GPT" >
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
@@ -108,7 +122,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />

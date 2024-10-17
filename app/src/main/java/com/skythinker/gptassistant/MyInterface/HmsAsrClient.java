@@ -1,4 +1,4 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.MyInterface;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +10,9 @@ import com.huawei.hms.mlsdk.asr.MLAsrConstants;
 import com.huawei.hms.mlsdk.asr.MLAsrListener;
 import com.huawei.hms.mlsdk.asr.MLAsrRecognizer;
 import com.huawei.hms.mlsdk.common.MLApplication;
+import com.skythinker.gptassistant.R;
 
-public class HmsAsrClient extends AsrClientBase{
+public class HmsAsrClient extends AsrClientBase {
 
     Context context = null;
     MLAsrRecognizer hwAsrRecognizer = null;

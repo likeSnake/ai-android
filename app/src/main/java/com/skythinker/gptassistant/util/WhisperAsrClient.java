@@ -1,14 +1,13 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.util;
 
 import android.content.Context;
 import android.media.MediaRecorder;
-import android.util.Log;
+
+import com.skythinker.gptassistant.MyInterface.AsrClientBase;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 
-public class WhisperAsrClient extends AsrClientBase{
+public class WhisperAsrClient extends AsrClientBase {
     MediaRecorder recorder = null;
     File recordFile = null;
     IAsrCallback callback = null;

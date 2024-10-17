@@ -1,7 +1,6 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +18,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.skythinker.gptassistant.R;
 
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;

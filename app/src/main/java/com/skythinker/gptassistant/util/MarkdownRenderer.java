@@ -1,4 +1,4 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.util;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,12 +9,14 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.text.style.LeadingMarginSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.skythinker.gptassistant.R;
+import com.skythinker.gptassistant.activity.GrammarLocatorDef;
 
 import org.commonmark.node.FencedCodeBlock;
 
@@ -27,14 +29,11 @@ import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonConfiguration;
 import io.noties.markwon.MarkwonSpansFactory;
 import io.noties.markwon.ext.latex.JLatexMathPlugin;
-import io.noties.markwon.ext.tables.TableAwareMovementMethod;
-import io.noties.markwon.ext.tables.TablePlugin;
 import io.noties.markwon.image.ImageSize;
 import io.noties.markwon.image.ImageSizeResolverDef;
 import io.noties.markwon.image.ImagesPlugin;
 import io.noties.markwon.inlineparser.MarkwonInlineParserPlugin;
 import io.noties.markwon.linkify.LinkifyPlugin;
-import io.noties.markwon.movement.MovementMethodPlugin;
 import io.noties.markwon.syntax.Prism4jThemeDefault;
 import io.noties.markwon.syntax.SyntaxHighlightPlugin;
 import io.noties.markwon.utils.LeadingMarginUtils;

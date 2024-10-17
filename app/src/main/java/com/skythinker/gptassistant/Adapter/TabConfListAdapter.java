@@ -1,18 +1,21 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.Adapter;
 
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.skythinker.gptassistant.util.PromptTabData;
+import com.skythinker.gptassistant.R;
+import com.skythinker.gptassistant.activity.TabConfActivity;
+import com.skythinker.gptassistant.entity.GlobalDataHolder;
 
 public class TabConfListAdapter extends RecyclerView.Adapter<TabConfListAdapter.ViewHolder> {
 

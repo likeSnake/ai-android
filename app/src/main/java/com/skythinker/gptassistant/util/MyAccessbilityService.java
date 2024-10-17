@@ -1,8 +1,6 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.util;
 
 import android.accessibilityservice.AccessibilityService;
-import android.app.ActivityManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -14,7 +12,7 @@ import android.view.accessibility.AccessibilityEvent;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import java.util.List;
+import com.skythinker.gptassistant.activity.MainActivity;
 
 public class MyAccessbilityService extends AccessibilityService {
 

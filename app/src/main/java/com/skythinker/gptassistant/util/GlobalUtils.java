@@ -1,4 +1,4 @@
-package com.skythinker.gptassistant;
+package com.skythinker.gptassistant.util;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;

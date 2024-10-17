@@ -91,7 +91,7 @@ public class AppInfoUtil {
         }).start();
     }
 
-    public ArrayList<AppInfo> getAppInfos(){
+    public static ArrayList<AppInfo> getAppInfos(){
             return appInfos;
     }
 
