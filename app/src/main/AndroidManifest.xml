@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.skythinker.gptassistant" >
+    package="com.skythinker.gptassistant">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -36,14 +36,17 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ai" >
+        android:theme="@style/Theme.ai">
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false" />
 
         <service
             android:name=".util.MyAccessbilityService"
             android:enabled="true"
             android:exported="true"
             android:label="@string/accessibility_service_label"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
@@ -58,7 +61,7 @@
             android:exported="true"
             android:icon="@drawable/tile_icon"
             android:label="GPT"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE" >
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -79,7 +82,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.TabConfActivity"
             android:exported="true" />
@@ -93,23 +95,22 @@
             android:name=".activity.MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateVisible|adjustResize" >
-
-            <intent-filter android:label="询问 GPT" >
+            android:windowSoftInputMode="stateVisible|adjustResize">
+            <intent-filter android:label="询问 GPT">
                 <action android:name="android.intent.action.PROCESS_TEXT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:mimeType="text/plain" />
             </intent-filter>
-            <intent-filter android:label="发送到Vision" >
+            <intent-filter android:label="发送到Vision">
                 <action android:name="android.intent.action.SEND" />
 
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:mimeType="image/*" />
             </intent-filter>
-            <intent-filter android:label="询问GPT" >
+            <intent-filter android:label="询问GPT">
                 <action android:name="android.intent.action.SEND" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -122,7 +123,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
