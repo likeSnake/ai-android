@@ -44,16 +44,6 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="注册"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:textColor="@color/black"/>
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -104,33 +94,49 @@
             android:layout_marginEnd="40dp"/>
 
         <LinearLayout
+            android:id="@+id/codeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/inputPhone"
             >
 
+            <EditText
+                android:id="@+id/verificationCode"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="3"
+
+                android:hint="验证码"
+                android:inputType="textPassword"
+                android:background="@drawable/random_sharp"
+                android:textColor="#6A6969"
+                android:textSize="14sp"
+                android:layout_marginStart="40dp" />
+
+            <Button
+                android:id="@+id/signInVGetCodeBut"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bt_round_login"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="5dp"
+                android:text="获取验证码"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/verificationCode"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/inputPhone"
-            android:layout_marginTop="10dp"
-            android:hint="验证码"
-            android:inputType="textPassword"
-            android:background="@drawable/random_sharp"
-            android:textColor="#6A6969"
-            android:textSize="14sp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"/>
+
 
         <Button
             android:id="@+id/start_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/verificationCode"
+            android:layout_below="@+id/codeLayout"
             android:layout_marginTop="10dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
