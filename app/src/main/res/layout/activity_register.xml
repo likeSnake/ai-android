@@ -55,7 +55,7 @@
         <EditText
             android:id="@+id/inputUserName"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:hint="用户名"
             android:background="@drawable/random_sharp"
             android:layout_marginStart="40dp"
@@ -86,7 +86,7 @@
             android:layout_below="@+id/inputUserPwd"
             android:layout_marginTop="10dp"
             android:hint="手机号"
-            android:inputType="textPassword"
+            android:inputType="phone"
             android:background="@drawable/random_sharp"
             android:textColor="#6A6969"
             android:textSize="14sp"
@@ -107,9 +107,8 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="3"
-
                 android:hint="验证码"
-                android:inputType="textPassword"
+                android:inputType="textCapWords"
                 android:background="@drawable/random_sharp"
                 android:textColor="#6A6969"
                 android:textSize="14sp"
@@ -118,30 +117,31 @@
             <Button
                 android:id="@+id/signInVGetCodeBut"
                 android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_weight="1"
+                android:layout_height="38dp"
+                android:layout_weight="1.1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/bt_round_login"
-                android:layout_marginEnd="10dp"
+                android:background="@drawable/bt_round_blue_10"
+                android:layout_marginEnd="40dp"
                 android:layout_marginStart="5dp"
                 android:text="获取验证码"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="11sp" />
 
         </LinearLayout>
 
 
 
         <Button
-            android:id="@+id/start_login"
+            android:id="@+id/start_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/codeLayout"
             android:layout_marginTop="10dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:background="@drawable/bt_round_login"
+            android:background="@drawable/bt_round_login_no"
             android:layout_marginBottom="10dp"
+            android:textColor="@color/teal_200"
             android:text="立即注册"/>
 
     </RelativeLayout>

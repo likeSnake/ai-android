@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.skythinker.gptassistant.util.MyToastUtil;
 import com.skythinker.gptassistant.util.MyUtil;
 import com.skythinker.gptassistant.util.PreferencesUtil;
 
@@ -30,7 +31,7 @@ public class App extends Application
         this.registerActivityLifecycleCallbacks(this);
         PreferencesUtil.init(this);
         initDate();
-
+        MyToastUtil.init(this);
         initGoogleAds();
 
     }
