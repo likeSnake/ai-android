@@ -72,5 +72,4 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     implementation 'com.tencent:mmkv:2.0.0'
-
 }

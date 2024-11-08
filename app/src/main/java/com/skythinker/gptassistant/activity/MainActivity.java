@@ -94,7 +94,7 @@ import com.skythinker.gptassistant.util.PromptTabData;
 import com.skythinker.gptassistant.R;
 import com.skythinker.gptassistant.util.WebScraper;
 import com.skythinker.gptassistant.util.WhisperAsrClient;
-import com.skythinker.gptassistant.entity.AppInfo;
+import com.skythinker.gptassistant.entity.AllAppInfos;
 import com.skythinker.gptassistant.entity.GlobalDataHolder;
 import com.skythinker.gptassistant.util.AppInfoUtil;
 
@@ -1232,10 +1232,10 @@ public class MainActivity extends Activity {
             int index = input.indexOf(keyName);
             if (index != -1){
                 String result = input.substring(index + keyName.length());
-                ArrayList<AppInfo> appInfos = AppInfoUtil.getAppInfos();
-                for (AppInfo appInfo : appInfos) {
-                    if (result.equals(appInfo.getAppName())){
-                        launchApp(MainActivity.this,appInfo.getPackageName());
+                ArrayList<AllAppInfos> allAppInfos = AppInfoUtil.getAppInfos();
+                for (AllAppInfos appInfos : allAppInfos) {
+                    if (result.equals(appInfos.getAppName())){
+                        launchApp(MainActivity.this, appInfos.getPackageName());
                         return false;
                     }
                 }

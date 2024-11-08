@@ -1,5 +1,6 @@
 package com.skythinker.gptassistant.activity;
 
+import static com.skythinker.gptassistant.util.MyUtil.APP_APPINFO_URL;
 import static com.skythinker.gptassistant.util.MyUtil.APP_BASE_URL;
 import static com.skythinker.gptassistant.util.MyUtil.APP_LOGIN_URL;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_INFO_URL;
@@ -93,7 +94,6 @@ public class LoginActivity extends AppCompatActivity{
                     }else {
                         MMKV.defaultMMKV().encode(MyUtil.ACCESS_TOKEN,myToken.getAccessToken());
                         MMKV.defaultMMKV().encode(MyUtil.REFRESH_TOKEN,myToken.getRefreshToken());
-                        MMKV.defaultMMKV().encode(MyUtil.IS_LOGIN,true);
                         getUserInfo();
                     }
                 }
@@ -101,14 +101,14 @@ public class LoginActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Exception e) {
-
+                MyToastUtil.showError(e.getMessage());
             }
         });
     }
 
     public void getUserInfo(){
 
-        HttpUtils.sendGetRequest(APP_BASE_URL+APP_USER_INFO_URL, new HttpUtils.HttpCallback<String>() {
+        HttpUtils.sendGetRequest(APP_BASE_URL+APP_APPINFO_URL, new HttpUtils.HttpCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 BaseEntity baseEntity = new Gson().fromJson(result, BaseEntity.class);
@@ -122,12 +122,14 @@ public class LoginActivity extends AppCompatActivity{
                     }
                 }else {
                     MyToastUtil.showSuccessful("登录成功");
+                    MMKV.defaultMMKV().encode(MyUtil.IS_LOGIN,true);
+
                 }
             }
 
             @Override
             public void onFailure(Exception e) {
-
+                MyToastUtil.showError(e.getMessage());
             }
         });
     }

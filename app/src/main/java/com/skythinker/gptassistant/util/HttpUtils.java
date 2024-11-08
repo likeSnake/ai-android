@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -31,8 +32,13 @@ public class HttpUtils {
     // get请求
     public static void sendGetRequest(String urlString, final HttpCallback<String> callback) {
         String token = MMKV.defaultMMKV().decodeString(MyUtil.ACCESS_TOKEN,"");
+        //OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS) // 设置连接超时为10秒
+                .readTimeout(30, TimeUnit.SECONDS) // 设置读取超时为30秒
+                .writeTimeout(30, TimeUnit.SECONDS) // 设置写入超时为30秒
+                .build();
 
-        OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(urlString)
                 .addHeader("Authorization",token)
@@ -59,8 +65,13 @@ public class HttpUtils {
     // post传参 地址、json值，回调
     public static void sendPostRequest(String urlString, String requestBody, final HttpCallback<String> callback) {
         String token = MMKV.defaultMMKV().decodeString(MyUtil.ACCESS_TOKEN,"");
+        //OkHttpClient client = new OkHttpClient();
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS) // 设置连接超时为10秒
+                .readTimeout(30, TimeUnit.SECONDS) // 设置读取超时为30秒
+                .writeTimeout(30, TimeUnit.SECONDS) // 设置写入超时为30秒
+                .build();
 
         RequestBody body = RequestBody.create(
                 MediaType.parse("application/json;charset=utf-8"),//设置数据类型
@@ -92,10 +103,16 @@ public class HttpUtils {
     // post请求 无参数
     public static void sendPostRequest(String urlString, final HttpCallback<String> callback) {
         String token = MMKV.defaultMMKV().decodeString(MyUtil.ACCESS_TOKEN,"");
-        OkHttpClient client = new OkHttpClient();
+        //OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(urlString)
                 .addHeader("Authorization",token)
+                .build();
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS) // 设置连接超时为10秒
+                .readTimeout(30, TimeUnit.SECONDS) // 设置读取超时为30秒
+                .writeTimeout(30, TimeUnit.SECONDS) // 设置写入超时为30秒
                 .build();
 
         client.newCall(request).enqueue(new Callback() {

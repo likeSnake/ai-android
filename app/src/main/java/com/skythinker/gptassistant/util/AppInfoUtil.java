@@ -9,15 +9,18 @@ import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
-import com.skythinker.gptassistant.entity.AppInfo;
+import com.skythinker.gptassistant.entity.AllAppInfos;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppInfoUtil {
-    private static ArrayList<AppInfo> appInfos;
+    private static ArrayList<AllAppInfos> allAppInfos;
+    private static final String TAG = "Ai文案助手";
+
     public static Drawable getAppIcon(Context context, String pkgName) {
         try {
             if (null != pkgName) {
@@ -51,8 +54,8 @@ public class AppInfoUtil {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (appInfos == null){
-                    appInfos = new ArrayList<>();
+                if (allAppInfos == null){
+                    allAppInfos = new ArrayList<>();
                 }else {
                     return;
                 }
@@ -82,7 +85,7 @@ public class AppInfoUtil {
                     //System.out.println("应用程序大小：" + appSize);
                     //byte[] bytes = getDrawableByte(icon);
 
-                    appInfos.add(new AppInfo(appName, packageName));
+                    allAppInfos.add(new AllAppInfos(appName, packageName));
                 }
 
                 // Notify the listener with the app list
@@ -91,12 +94,12 @@ public class AppInfoUtil {
         }).start();
     }
 
-    public static ArrayList<AppInfo> getAppInfos(){
-            return appInfos;
+    public static ArrayList<AllAppInfos> getAppInfos(){
+            return allAppInfos;
     }
 
     public interface AppListListener {
-        void onAppListFetched(ArrayList<AppInfo> appList);
+        void onAppListFetched(ArrayList<AllAppInfos> appList);
     }
     public static byte[] convertDrawableToByteArray(Drawable drawable) {
         Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
@@ -138,5 +141,21 @@ public class AppInfoUtil {
         // 将字节数组输出流转化为字节数组byte[]
         byte[] bitmapdata = stream.toByteArray();
         return bitmapdata;
+    }
+
+    /**
+     * 获取版本号
+     *
+     * @param context
+     * @return
+     */
+    public static int getVerCode(Context context) {
+        int verName = 0;
+        try {
+            verName = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, e.getMessage());
+        }
+        return verName;
     }
 }

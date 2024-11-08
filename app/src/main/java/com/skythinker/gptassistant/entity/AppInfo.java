@@ -1,81 +1,62 @@
 package com.skythinker.gptassistant.entity;
-public class AppInfo {
-    private String appName;
-    private byte[] icon;
-    private String packageName;
-    private long size;
-    private boolean isStart = false;
-    private boolean refreshStart = true;
-    private int progress=0;
 
-    public AppInfo(String appName, byte[] icon, String packageName, long size) {
-        this.appName = appName;
-        this.icon = icon;
-        this.packageName = packageName;
-        this.size = size;
+
+import java.io.Serializable;
+
+// APP信息
+public class AppInfo implements Serializable {
+    private Integer version; // 最新版本
+    private String updateInfo; // 更新公告
+    private String versionName; // 版本名
+    private int versionCode; // 版本代码
+    private String versionUrl; // 更新地址
+    private String versionContent; //
+
+    public Integer getVersion() {
+        return version;
     }
 
-    public AppInfo(String appName, String packageName) {
-        this.appName = appName;
-        this.packageName = packageName;
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
-    public String getAppName() {
-        return appName;
+    public String getUpdateInfo() {
+        return updateInfo;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public void setUpdateInfo(String updateInfo) {
+        this.updateInfo = updateInfo;
     }
 
-    public byte[] getIcon() {
-        return icon;
+    public String getVersionName() {
+        return versionName;
     }
 
-    public void setIcon(byte[] icon) {
-        this.icon = icon;
+    public void setVersionName(String versionName) {
+        this.versionName = versionName;
     }
 
-    public String getPackageName() {
-        return packageName;
+    public int getVersionCode() {
+        return versionCode;
     }
 
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
+    public void setVersionCode(int versionCode) {
+        this.versionCode = versionCode;
     }
 
-    public long getSize() {
-        return size;
+    public String getVersionUrl() {
+        return versionUrl;
     }
 
-    public void setSize(long size) {
-        this.size = size;
+    public void setVersionUrl(String versionUrl) {
+        this.versionUrl = versionUrl;
     }
 
-    public boolean isStart() {
-        return isStart;
+    public String getVersionContent() {
+        return versionContent;
     }
 
-    public void setStart(boolean start) {
-        isStart = start;
-    }
-
-    public int getProgress() {
-        return progress;
-    }
-    public void startProgress(){
-        progress++;
-    }
-
-    public void setProgress(int progress) {
-        this.progress = progress;
-    }
-
-    public boolean isRefreshStart() {
-        return refreshStart;
-    }
-
-    public void setRefreshStart(boolean refreshStart) {
-        this.refreshStart = refreshStart;
+    public void setVersionContent(String versionContent) {
+        this.versionContent = versionContent;
     }
 }
