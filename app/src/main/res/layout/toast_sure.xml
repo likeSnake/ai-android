@@ -16,12 +16,12 @@
             android:src="@drawable/ic_toast_sure" />
 
         <TextView
-            android:id="@+id/ErrorTips"
+                android:id="@+id/sureTips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="密码错误，请重试！"
+            android:text="内容！"
             android:textColor="#099A9F"
             android:textSize="15sp"
             android:ellipsize="end"/>

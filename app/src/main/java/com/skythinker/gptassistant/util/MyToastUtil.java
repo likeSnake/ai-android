@@ -1,5 +1,6 @@
 package com.skythinker.gptassistant.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,9 +36,10 @@ public class MyToastUtil {
         toast.show();
     }
 
-    public static void showZ(String content){
-        View view = LayoutInflater.from(context).inflate(R.layout.toast_view, null, false);
-        tipsText = view.findViewById(R.id.ErrorTips);
+    @SuppressLint("MissingInflatedId")
+    public static void showSuccessful(String content){
+        View view = LayoutInflater.from(context).inflate(R.layout.toast_sure, null, false);
+        tipsText = view.findViewById(R.id.sureTips);
         toast.setView(view);
         tipsText.setText(content);
         toast.show();

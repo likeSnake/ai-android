@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import com.skythinker.gptassistant.util.MyToastUtil;
 import com.skythinker.gptassistant.util.MyUtil;
 import com.skythinker.gptassistant.util.PreferencesUtil;
+import com.tencent.mmkv.MMKV;
 
 /**
  * 作者: jiang
@@ -31,6 +32,7 @@ public class App extends Application
         this.registerActivityLifecycleCallbacks(this);
         PreferencesUtil.init(this);
         initDate();
+        MMKV.initialize(this);
         MyToastUtil.init(this);
         initGoogleAds();
 
