@@ -13,7 +13,7 @@ public class User implements Serializable {
     private Integer id;
     private String userName; // 用户名
     private String password; // 密码
-    private Integer phone_number; // 用户手机号
+    private String phone_number; // 用户手机号
     private String created_at; // 用户注册时间
     private String updated_at; // 用户信息最后一次更新的时间。
     private int status; // 用户状态 0正常 1封禁
@@ -42,11 +42,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Integer getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(Integer phone_number) {
+    public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 

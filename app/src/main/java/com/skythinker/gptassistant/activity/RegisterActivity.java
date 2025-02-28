@@ -1,5 +1,7 @@
 package com.skythinker.gptassistant.activity;
 
+import static com.skythinker.gptassistant.util.MyUtil.APP_USER_REGISTER_URL;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -168,14 +170,15 @@ public class RegisterActivity extends AppCompatActivity {
         User user = new User();
         user.setUserName(userName);
         user.setPassword(password);
-        user.setPhone_number(Integer.parseInt(phone));
+        user.setPhone_number(phone);
 
         String json = new Gson().toJson(user);
 
-        HttpUtils.sendPostRequest("url", json, new HttpUtils.HttpCallback<String>() {
+        HttpUtils.sendPostRequest(APP_USER_REGISTER_URL, json, new HttpUtils.HttpCallback<String>() {
             @Override
             public void onSuccess(String result) {
-
+                MyToastUtil.showSuccessful("注册成功");
+                finish();
             }
 
             @Override
@@ -184,6 +187,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public boolean checkVerificationCode(String code){
+        return true;
     }
 
     public void getVerificationCode(){

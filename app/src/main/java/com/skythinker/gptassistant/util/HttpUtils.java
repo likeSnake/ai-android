@@ -1,5 +1,7 @@
 package com.skythinker.gptassistant.util;
 
+import static com.skythinker.gptassistant.util.MyUtil.APP_BASE_URL;
+
 import android.util.Log;
 
 import java.io.IOException;
@@ -31,6 +33,7 @@ public class HttpUtils {
 
     // get请求
     public static void sendGetRequest(String urlString, final HttpCallback<String> callback) {
+        String url = APP_BASE_URL+urlString;
         String token = MMKV.defaultMMKV().decodeString(MyUtil.ACCESS_TOKEN,"");
         //OkHttpClient client = new OkHttpClient();
         OkHttpClient client = new OkHttpClient.Builder()
@@ -40,7 +43,7 @@ public class HttpUtils {
                 .build();
 
         Request request = new Request.Builder()
-                .url(urlString)
+                .url(url)
                 .addHeader("Authorization",token)
                 .get()
                 .build();
@@ -64,6 +67,7 @@ public class HttpUtils {
 
     // post传参 地址、json值，回调
     public static void sendPostRequest(String urlString, String requestBody, final HttpCallback<String> callback) {
+        String url = APP_BASE_URL+urlString;
         String token = MMKV.defaultMMKV().decodeString(MyUtil.ACCESS_TOKEN,"");
         //OkHttpClient client = new OkHttpClient();
 
@@ -78,7 +82,7 @@ public class HttpUtils {
                 requestBody//数据
         );
         Request request = new Request.Builder()
-                .url(urlString)
+                .url(url)
                 .addHeader("Authorization",token)
                 .post(body)
                 .build();
@@ -102,10 +106,11 @@ public class HttpUtils {
     }
     // post请求 无参数
     public static void sendPostRequest(String urlString, final HttpCallback<String> callback) {
+        String url = APP_BASE_URL+urlString;
         String token = MMKV.defaultMMKV().decodeString(MyUtil.ACCESS_TOKEN,"");
         //OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(urlString)
+                .url(url)
                 .addHeader("Authorization",token)
                 .build();
 

@@ -13,7 +13,7 @@
         android:id="@+id/titleLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="30dp">
 
         <ImageView
             android:layout_width="30dp"
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleLayout"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         >
         <EditText
             android:id="@+id/inputUserName"
@@ -94,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/inputUserPwd"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:background="@drawable/bt_round_login"

@@ -7,13 +7,13 @@
     android:layout_height="match_parent"
     android:background="#F6F2F2"
     android:fitsSystemWindows="true"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.RegisterActivity">
 
     <RelativeLayout
         android:id="@+id/titleLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="30dp">
 
         <ImageView
             android:layout_width="30dp"
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleLayout"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         >
         <EditText
             android:id="@+id/inputUserName"
@@ -60,7 +60,6 @@
             android:background="@drawable/random_sharp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:inputType="number"
             android:textColor="#6A6969"
             android:textSize="14sp"
             />
@@ -129,14 +128,13 @@
 
         </LinearLayout>
 
-
-
         <Button
             android:id="@+id/start_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/codeLayout"
-            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:background="@drawable/bt_round_login_no"
