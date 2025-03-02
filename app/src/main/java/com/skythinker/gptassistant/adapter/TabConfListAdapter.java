@@ -1,4 +1,4 @@
-package com.skythinker.gptassistant.Adapter;
+package com.skythinker.gptassistant.adapter;
 
 import android.content.Intent;
 import android.util.Log;

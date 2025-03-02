@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity{
         user.setPassword(userPwd);
 
         String json = new Gson().toJson(user);
-        HttpUtils.sendPostRequest(APP_BASE_URL+APP_LOGIN_URL, json, new HttpUtils.HttpCallback<String>() {
+        HttpUtils.sendPostRequest(APP_LOGIN_URL, json, new HttpUtils.HttpCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 //BaseEntity baseEntity = new Gson().fromJson(result, BaseEntity.class);
@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity{
 
     public void getUserInfo(){
 
-        HttpUtils.sendGetRequest(APP_BASE_URL+APP_APPINFO_URL, new HttpUtils.HttpCallback<String>() {
+        HttpUtils.sendGetRequest(APP_USER_INFO_URL, new HttpUtils.HttpCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 BaseEntity baseEntity = new Gson().fromJson(result, BaseEntity.class);
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity{
                 }else {
                     MyToastUtil.showSuccessful("登录成功");
                     MMKV.defaultMMKV().encode(MyUtil.IS_LOGIN,true);
-
+                    startMain();
                 }
             }
 
@@ -132,6 +132,11 @@ public class LoginActivity extends AppCompatActivity{
                 MyToastUtil.showError(e.getMessage());
             }
         });
+    }
+
+    public void startMain(){
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        finish();
     }
 
     @Override

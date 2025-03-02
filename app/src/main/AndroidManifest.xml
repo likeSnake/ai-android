@@ -4,12 +4,13 @@
     package="com.skythinker.gptassistant">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -26,7 +27,6 @@
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -38,15 +38,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ai">
         <activity
+            android:name=".activity.MainActivity2"
+            android:exported="false" />
+        <activity
             android:name=".activity.WelcomeActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.RegisterActivity"
             android:exported="false" />
@@ -85,8 +87,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.StartActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity
             android:name=".activity.TabConfActivity"
             android:exported="true" />

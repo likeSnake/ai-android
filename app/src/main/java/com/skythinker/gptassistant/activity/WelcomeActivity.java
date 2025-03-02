@@ -38,7 +38,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void startMain(){
-        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+        startActivity(new Intent(WelcomeActivity.this, MainActivity2.class));
         finish();
     }
 
@@ -66,7 +66,7 @@ public class WelcomeActivity extends AppCompatActivity {
         myToken.setRefreshToken(refreshToken);
         String json = new Gson().toJson(myToken);
 
-        HttpUtils.sendPostRequest(APP_BASE_URL+APP_USER_REFRESH_TOKEN,json, new HttpUtils.HttpCallback<String>() {
+        HttpUtils.sendPostRequest(APP_USER_REFRESH_TOKEN,json, new HttpUtils.HttpCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 BaseEntity<MyToken> baseEntity = new Gson().fromJson(result, new TypeToken<BaseEntity<MyToken>>(){}.getType());

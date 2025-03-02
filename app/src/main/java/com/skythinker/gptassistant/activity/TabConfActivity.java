@@ -36,7 +36,7 @@ import com.skythinker.gptassistant.BuildConfig;
 import com.skythinker.gptassistant.util.ConfirmDialog;
 import com.skythinker.gptassistant.util.PromptTabData;
 import com.skythinker.gptassistant.R;
-import com.skythinker.gptassistant.Adapter.TabConfListAdapter;
+import com.skythinker.gptassistant.adapter.TabConfListAdapter;
 import com.skythinker.gptassistant.entity.GlobalDataHolder;
 
 import org.json.JSONException;
