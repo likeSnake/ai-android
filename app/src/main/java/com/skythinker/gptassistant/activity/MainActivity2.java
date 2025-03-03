@@ -14,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.skythinker.gptassistant.R;
 import com.skythinker.gptassistant.fragment.CreateFragment;
+import com.skythinker.gptassistant.fragment.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +39,9 @@ public class MainActivity2 extends AppCompatActivity {
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new CreateFragment());
-        fragmentList.add(new CreateFragment());
+        fragmentList.add(new HomeFragment());
 
-        viewPager.setCurrentItem(1, false);
+        viewPager.setCurrentItem(0, false);
         bottomNavigationView.setSelectedItemId(R.id.create_item);
     }
     private void setupViewPagerWithBottomNav() {
@@ -63,10 +64,10 @@ public class MainActivity2 extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home_item){
+                if (item.getItemId() == R.id.create_item){
                     viewPager.setCurrentItem(0, false);
                     return true;
-                }else if (item.getItemId() == R.id.create_item) {
+                }else if (item.getItemId() == R.id.home_item) {
                     viewPager.setCurrentItem(1, false);
                     return true;
                 }
@@ -81,10 +82,10 @@ public class MainActivity2 extends AppCompatActivity {
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        bottomNavigationView.setSelectedItemId(R.id.home_item);
+                        bottomNavigationView.setSelectedItemId(R.id.create_item);
                         break;
                     case 1:
-                        bottomNavigationView.setSelectedItemId(R.id.create_item);
+                        bottomNavigationView.setSelectedItemId(R.id.home_item);
                         break;
                 }
             }
@@ -106,7 +107,7 @@ public class MainActivity2 extends AppCompatActivity {
                 case 0:
                     return new CreateFragment();
                 case 1:
-                    return new CreateFragment();
+                    return new HomeFragment();
                 default:
                     return new CreateFragment();
             }

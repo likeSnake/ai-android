@@ -3,13 +3,13 @@
 
     <item
         android:title="首页"
-        android:id="@+id/home_item"
+        android:id="@+id/create_item"
         android:icon="@drawable/ic_chuangzuo"
         />
 
     <item
         android:title="我的"
-        android:id="@+id/create_item"
+        android:id="@+id/home_item"
         android:icon="@drawable/ic_home"
         />
 
