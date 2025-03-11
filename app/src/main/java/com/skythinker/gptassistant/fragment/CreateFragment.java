@@ -5,11 +5,14 @@ import static com.skythinker.gptassistant.util.MyUtil.APP_USER_GET_TEMPLATE;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_INFO_URL;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -19,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.skythinker.gptassistant.R;
+import com.skythinker.gptassistant.activity.mainUI.EditorCreateAct;
 import com.skythinker.gptassistant.entity.base.BaseEntity;
 import com.skythinker.gptassistant.entity.base.BaseListEntity;
 import com.skythinker.gptassistant.entity.copyWriter.TextTemplate;
@@ -132,7 +136,20 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder2 holder, int position) {
             TextTemplate data = dataList.get(position);
+            if (data == null){
+                return;
+            }
+            String title = data.getTitle();
+            String content = data.getContent();
+            holder.content_item.setText(content);
+            holder.title_item.setText(title);
 
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().startActivity(new Intent(getContext(), EditorCreateAct.class));
+                }
+            });
 
         }
 
@@ -141,10 +158,12 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
             return dataList.size();
         }
         class ViewHolder2 extends RecyclerView.ViewHolder {
-            CheckBox menu_box;
+            TextView title_item,content_item;
 
             public ViewHolder2(View itemView) {
                 super(itemView);
+                title_item = itemView.findViewById(R.id.title_item);
+                content_item = itemView.findViewById(R.id.content_item);
 
             }
         }
