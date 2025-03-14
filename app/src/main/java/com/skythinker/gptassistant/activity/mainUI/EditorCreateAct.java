@@ -3,12 +3,15 @@ package com.skythinker.gptassistant.activity.mainUI;
 import static com.skythinker.gptassistant.entity.base.ChatStreamClient.sendChatStream;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skythinker.gptassistant.R;
 import com.skythinker.gptassistant.entity.base.ChatRequest;
+import com.skythinker.gptassistant.entity.copyWriter.TextTemplate;
+import com.skythinker.gptassistant.util.MyToastUtil;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,7 +35,12 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import butterknife.BindView;
+import io.noties.markwon.Markwon;
 import okhttp3.*;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -49,6 +57,11 @@ import cn.hutool.json.JSONObject;
 
 public class EditorCreateAct extends AppCompatActivity {
     private Unbinder unbinder;
+    @BindView(R.id.myText)
+    TextView myText;
+    private StringBuilder markdownContent = new StringBuilder();
+    private TextTemplate nowTemplate;
+    private List<ChatRequest.Message> messageList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,19 +71,55 @@ public class EditorCreateAct extends AppCompatActivity {
     }
 
     public void initData(){
-
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        sendChatStream("给我一周健康食谱", System.out::println);
-
-                        //String data = sendDeepseekChat(DEEPSEEK_API_URL_COMPLETIONS, "如何学习Java代码");
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+        messageList = new ArrayList<>();
+        nowTemplate = (TextTemplate) getIntent().getSerializableExtra("textTemplate");
+        if (nowTemplate == null){
+            MyToastUtil.showError("文案模板获取失败!");
+            finish();
+            return;
+        }
+        /*thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //sendChatStream("给我一周健康食谱", System.out::println);
+                    //sendChatStream("给我一周健康食谱,我在减脂，年龄23，男", text -> runOnUiThread(() -> myText.append(text)));
+                    //String data = sendDeepseekChat(DEEPSEEK_API_URL_COMPLETIONS, "如何学习Java代码");
+                    // 发送流式请求
+                    sendChatStream("给我一周健康食谱,我在减脂，年龄23，男", markdownText ->
+                            runOnUiThread(() -> {
+                                Markwon markwon = Markwon.create(EditorCreateAct.this);
+                                markwon.setMarkdown(myText, markdownText);
+                            })
+                    );
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
-            }).start();
+            }
+        });
+        thread.start();*/
+    }
+
+    public void showContentDialog(){
+
+    }
+
+    public void sendQuestion(String msg){
+        ChatRequest.Message systemMessage = new ChatRequest.Message(nowTemplate.getPrompt(), "system", "小助手");
+        ChatRequest.Message userMessage = new ChatRequest.Message(msg, "user", "文案工作者");
+
+        messageList.add(systemMessage);
+        messageList.add(userMessage);
+
+        ChatRequest chatRequest = new ChatRequest(messageList);
+
+        Markwon markwon = Markwon.create(EditorCreateAct.this);
+        sendChatStream(chatRequest, markdownText ->
+                runOnUiThread(() -> {
+                    markdownContent.append(markdownText);
+                    markwon.setMarkdown(myText, markdownContent.toString());
+                })
+        );
     }
 
     @Override
@@ -78,108 +127,5 @@ public class EditorCreateAct extends AppCompatActivity {
         super.onDestroy();
         unbinder.unbind();
     }
-    private static final String DEEPSEEK_API_URL_COMPLETIONS = "https://api.deepseek.com/chat/completions"; // API地址 ——
-    // 对话补全
-
-    private static final String DEEPSEEK_API_KEY = "sk-1df1477409e347d98951ecac5277cf82"; // 官网申请的api key
-
-
-    public String sendDeepseekChat(String deepseekUrl, String context) throws IOException {
-        String result = "";
-
-        URL url_req = new URL(deepseekUrl);
-
-        HttpsURLConnection connection = (HttpsURLConnection) url_req.openConnection();
-
-        // 设置参数
-        connection.setDoOutput(true); // 需要输出
-        connection.setDoInput(true); // 需要输入
-        connection.setUseCaches(false); // 不允许缓存
-        connection.setConnectTimeout(60000); // 设置连接超时
-        connection.setReadTimeout(60000); // 设置读取超时
-        connection.setRequestMethod("POST"); // 设置POST方式连接
-
-        // 设置请求属性
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setRequestProperty("Accept", "application/json");
-        connection.setRequestProperty("Charset", "UTF-8");
-
-        // 设置请求头参数
-        connection.addRequestProperty("Authorization", "Bearer " + DEEPSEEK_API_KEY); // 设置appId
-
-        HttpsURLConnection https = (HttpsURLConnection) connection;
-        SSLSocketFactory oldSocketFactory = trustAllHosts(https);
-        HostnameVerifier oldHostnameVerifier = https.getHostnameVerifier();
-        https.setHostnameVerifier(DO_NOT_VERIFY);
-
-        ChatRequest.Message systemMessage = new ChatRequest.Message("你是", "system", "小助手");
-        ChatRequest.Message userMessage = new ChatRequest.Message(context, "user", "路人甲");
-
-        ChatRequest chatRequest = new ChatRequest(Arrays.asList(systemMessage, userMessage));
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        String requestData = objectMapper.writeValueAsString(chatRequest);
-
-        try (OutputStream os = connection.getOutputStream()) {
-            byte[] input = requestData.getBytes("utf-8");
-            os.write(input,0,input.length);
-        }
-
-        // 输出数据
-        InputStream in = connection.getInputStream(); // 获取返回数据
-        BufferedInputStream bis = new BufferedInputStream(in);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        int c;
-        while (-1 != (c = bis.read())) {
-            baos.write(c);
-        }
-        bis.close();
-        in.close();
-        baos.flush();
-
-        byte[] data = baos.toByteArray();
-        String responseMsg = new String(data);
-        System.out.println(responseMsg);
-
-        JSONObject jsonObject = new JSONObject(responseMsg);
-
-        if(jsonObject.containsKey("choices") && !jsonObject.getJSONArray("choices").isEmpty()) {
-            JSONObject delta = ((JSONObject) jsonObject.getJSONArray("choices").get(0)).getJSONObject("message");
-        }
-
-
-        return "result";
-    }
-
-    private SSLSocketFactory trustAllHosts(HttpsURLConnection connection) {
-        SSLSocketFactory oldFactory = connection.getSSLSocketFactory();
-        try {
-            SSLContext sc = SSLContext.getInstance("TLS");
-            sc.init(null, trustAllCerts, new java.security.SecureRandom());
-            SSLSocketFactory newFactory = sc.getSocketFactory();
-            connection.setSSLSocketFactory(newFactory);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return oldFactory;
-    }
-
-    private TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
-        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-            return new java.security.cert.X509Certificate[] {};
-        }
-
-        public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-        }
-
-        public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-        }
-    } };
-
-    private HostnameVerifier DO_NOT_VERIFY = new HostnameVerifier() {
-        public boolean verify(String hostname, SSLSession session) {
-            return true;
-        }
-    };
 
 }

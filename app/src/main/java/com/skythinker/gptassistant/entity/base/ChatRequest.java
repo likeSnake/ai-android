@@ -61,12 +61,12 @@ public class ChatRequest {
         this.presencePenalty = 0;
         this.responseFormat = new ResponseFormat("text");
         this.stop = null;
-        this.stream = false;
+        this.stream = true;
         this.streamOptions = null;
         this.temperature = 1;
         this.topP = 1;
         this.tools = null;
-        this.toolChoice = "none";
+        this.toolChoice = "auto";
         this.logprobs = false;
         this.topLogprobs = null;
     }

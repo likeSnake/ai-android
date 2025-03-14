@@ -147,7 +147,10 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().startActivity(new Intent(getContext(), EditorCreateAct.class));
+                    Intent intent = new Intent(getContext(), EditorCreateAct.class);
+                    intent.putExtra("textTemplate",data);
+
+                    getActivity().startActivity(intent);
                 }
             });
 
