@@ -1,0 +1,13 @@
+<resources>
+
+    <!--带距离条目分割线-->
+    <style name="line_bottom_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.8dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:background">@color/gray4</item>
+    </style>
+</resources>

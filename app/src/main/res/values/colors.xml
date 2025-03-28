@@ -27,4 +27,20 @@
     <!--半透明-->
     <color name="translucent">#22050505</color>
     <color name="my_colors">#00ffffff</color>
+
+    <color name="green0">#51d367</color>
+    <color name="detail_green">#99cc33</color>
+    <color name="detail_yellow">#FBD029</color>
+    <color name="detail_red">#F38181</color>
+    <color name="delete_red">#F26A6C</color>
+    <color name="color_back_loft">#FDF0F0</color>
+    <color name="color_result_loft">#E8E3EE</color>
+    <color name="gray0">#f4f5f4</color>
+    <color name="gray1">#f0f0f0</color>
+    <color name="gray2">#EEEEEE</color>
+    <color name="gray3">#F7F7F7</color>
+    <color name="gray4">#e7e4e4</color>
+    <color name="gray5">#F0F2F5</color>
+    <color name="gray6">#D5D5D5</color>
+    <color name="gray7">#A5A5A5</color>
 </resources>

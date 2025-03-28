@@ -24,6 +24,8 @@ public class ChatStreamClient {
             .retryOnConnectionFailure(true)        // 允许自动重试
             .build();
 
+    private HttpCallBack callBack;
+
     /*public static void sendChatStream(String context, Consumer<String> callback) {
         ChatRequest.Message systemMessage = new ChatRequest.Message("你是", "system", "小助手");
         ChatRequest.Message userMessage = new ChatRequest.Message(context, "user", "路人甲");
@@ -57,8 +59,7 @@ public class ChatStreamClient {
             }
         });
     }*/
-    public static void sendChatStream(ChatRequest chatRequest, Consumer<String> callback) {
-
+    public static void sendChatStream(ChatRequest chatRequest, HttpCallBack callback) {
         String jsonRequest = gson.toJson(chatRequest);
 
         Request request = new Request.Builder()
@@ -71,41 +72,62 @@ public class ChatStreamClient {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                callback.accept("Request failed: " + e.getMessage());
+                callback.onFail("Request failed: " + e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    callback.accept("Error: " + response.code() + " " + response.message());
+                    callback.onFail("Error: " + response.code() + " " + response.message());
                     return;
                 }
+                callback.onStart();
 
                 try (ResponseBody responseBody = response.body();
                      BufferedReader reader = new BufferedReader(responseBody.charStream())) {
                     String line;
+                    StringBuilder allString = new StringBuilder();
                     while ((line = reader.readLine()) != null) {
+                        line = line.trim();
+                        allString.append(line);
+                        if (line.isEmpty()) {
+                            continue;
+                        }
+
+                        // 检测流式响应结束标志
+                        /*if (line.equals("data: [DONE]")) {
+                            callback.accept("[DONE]");  // 你可以选择调用一个特定的结束回调
+                            break; // 退出循环，停止读取
+                        }*/
+
                         if (line.startsWith("data:")) {
                             String jsonString = line.substring(5).trim();
-                                try {
-                                    JsonObject jsonObject = gson.fromJson(jsonString.toString(), JsonObject.class);
-                                    JsonArray choices = jsonObject.getAsJsonArray("choices");
-                                    if (choices != null && choices.size() > 0) {
-                                        JsonObject delta = choices.get(0).getAsJsonObject().getAsJsonObject("delta");
-                                        if (delta != null && delta.has("content")) {
-                                            String content = delta.get("content").getAsString();
-                                            callback.accept(content);
-                                        }
+                            try {
+                                JsonObject jsonObject = gson.fromJson(jsonString, JsonObject.class);
+                                JsonArray choices = jsonObject.getAsJsonArray("choices");
+                                if (choices != null && choices.size() > 0) {
+                                    JsonObject delta = choices.get(0).getAsJsonObject().getAsJsonObject("delta");
+                                    if (delta != null && delta.has("content")) {
+                                        String content = delta.get("content").getAsString();
+                                        callback.onSucceed(content);
                                     }
-                                } catch (JsonSyntaxException e) {
-                                    System.err.println("JSON 解析错误: " + e.getMessage());
                                 }
-                                //callback.accept(jsonBuffer.toString());
-                                //jsonBuffer.setLength(0);
+                            } catch (JsonSyntaxException e) {
+                                System.err.println("JSON 解析错误: " + e.getMessage());
+                            }
                         }
                     }
+                    callback.onFinish();
                 }
             }
+
         });
+    }
+
+    public interface HttpCallBack{
+        void onSucceed(String content);
+        void onFail(String msg);
+        void onFinish();
+        void onStart();
     }
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_round_all_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/dialogInputHTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="标题"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <View style="@style/line_bottom_line" />
+
+    <EditText
+        android:id="@+id/promptText"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="10dp"
+        android:hint="提示词"
+        android:gravity="top|left"/>
+
+    <View style="@style/line_bottom_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialogInputHClose"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_red_button"
+            android:text="取消"
+            android:textAllCaps="false"
+            android:textColor="@color/delete_red"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/dialogInputHSubmit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_round_all_blue"
+            android:text="开始生成"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
