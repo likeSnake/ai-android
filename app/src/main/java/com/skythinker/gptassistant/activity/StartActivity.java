@@ -26,7 +26,7 @@ public class StartActivity extends AppCompatActivity {
 
         if (isLogin){
             // 主界面
-            startActivity(new Intent(StartActivity.this,MainActivity.class));
+            startActivity(new Intent(StartActivity.this,MainActivity2.class));
         }else {
             // 去登陆
             startActivity(new Intent(StartActivity.this, LoginActivity.class));

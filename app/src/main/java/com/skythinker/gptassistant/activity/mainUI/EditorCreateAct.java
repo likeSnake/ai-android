@@ -2,6 +2,7 @@ package com.skythinker.gptassistant.activity.mainUI;
 
 import static com.skythinker.gptassistant.entity.base.ChatStreamClient.sendChatStream;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,8 @@ public class EditorCreateAct extends AppCompatActivity {
     private List<ChatRequest.Message> messageList;
     private android.app.AlertDialog dialog;
     private boolean isFinish = false;
+    private boolean isContinuous = true;    // 连续对话
+    private String AiName = "小助手";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,38 +99,29 @@ public class EditorCreateAct extends AppCompatActivity {
             finish();
             return;
         }
-        showContentDialog();
-        /*thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    //sendChatStream("给我一周健康食谱", System.out::println);
-                    //sendChatStream("给我一周健康食谱,我在减脂，年龄23，男", text -> runOnUiThread(() -> myText.append(text)));
-                    //String data = sendDeepseekChat(DEEPSEEK_API_URL_COMPLETIONS, "如何学习Java代码");
-                    // 发送流式请求
-                    sendChatStream("给我一周健康食谱,我在减脂，年龄23，男", markdownText ->
-                            runOnUiThread(() -> {
-                                Markwon markwon = Markwon.create(EditorCreateAct.this);
-                                markwon.setMarkdown(myText, markdownText);
-                            })
-                    );
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-        thread.start();*/
+        initAi();
+        showContentDialog(0);
     }
 
+    public void initAi(){
+        ChatRequest.Message systemMessage = new ChatRequest.Message(nowTemplate.getPrompt(), "system", AiName);
+        messageList.add(systemMessage);
+    }
+
+    @SuppressLint("NonConstantResourceId")
     @OnClick({R.id.saveContent,R.id.optimizeContent})
     public void myClickListener(View view) {
         switch (view.getId()){
             case R.id.saveContent:
+                if (isFinish){
 
+                }else {
+                    MyToastUtil.showError("请等待文案生成");
+                }
                 break;
             case R.id.optimizeContent:
                 if (isFinish){
-
+                    showContentDialog(1);
                 }else {
                     MyToastUtil.showError("请等待文案生成");
                 }
@@ -135,7 +129,8 @@ public class EditorCreateAct extends AppCompatActivity {
         }
     }
 
-    public void showContentDialog(){
+    // type:0生成 1优化
+    public void showContentDialog(int type){
         EditText dialogExportName;
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_content_input, null);
         view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -149,28 +144,48 @@ public class EditorCreateAct extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
+        TextView textTitle =  view.findViewById(R.id.dialogInputHTitle);
         Button close = view.findViewById(R.id.dialogInputHClose);
         Button submit = view.findViewById(R.id.dialogInputHSubmit);
         EditText promptText = view.findViewById(R.id.promptText);
+        if (type == 0){
+            textTitle.setText(getString(R.string.editor_create_act_hint1));
+            promptText.setHint(getString(R.string.editor_create_act_hint2));
+        }else {
+            textTitle.setText(getString(R.string.editor_create_act_hint3));
+            promptText.setHint(getString(R.string.editor_create_act_hint4));
+        }
 
-        close.setOnClickListener((v)->{});
+        close.setOnClickListener((v)->{
+            if (isFinish){
+                dialog.dismiss();
+            }else {
+                finish();
+            }
+        });
         submit.setOnClickListener((v)->{
             String s_prompt = promptText.getText().toString();
             if (s_prompt.isEmpty()){
                 MyToastUtil.showError("请先输入提示内容");
                 return;
             }
-            sendQuestion(s_prompt);
+            String s1_prompt = "";
+            if (type == 1){
+                s1_prompt = "优化文案，";
+            }
+            s1_prompt +=s_prompt;
+            sendQuestion(s1_prompt);
             dialog.dismiss();
         });
     }
 
     public void sendQuestion(String msg){
         showLoading();
-        ChatRequest.Message systemMessage = new ChatRequest.Message(nowTemplate.getPrompt(), "system", "小助手");
-        ChatRequest.Message userMessage = new ChatRequest.Message(msg, "user", "文案工作者");
+        // 清空
+        markdownContent.setLength(0);
+        markdownContent.trimToSize();  // 将容量缩减到与长度匹配
 
-        messageList.add(systemMessage);
+        ChatRequest.Message userMessage = new ChatRequest.Message(msg, "user", "文案工作者");
         messageList.add(userMessage);
 
         ChatRequest chatRequest = new ChatRequest(messageList);
@@ -193,7 +208,9 @@ public class EditorCreateAct extends AppCompatActivity {
             @Override
             public void onFinish() {
                 isFinish = true;
-                onContentFinish();
+                runOnUiThread(() -> {
+                    onContentFinish();
+                });
             }
 
             @Override
@@ -207,6 +224,7 @@ public class EditorCreateAct extends AppCompatActivity {
     }
 
     public void showLoading(){
+        isFinish = false;
         contentPro.setVisibility(View.VISIBLE);
         onContentLoading();
     }
@@ -222,6 +240,9 @@ public class EditorCreateAct extends AppCompatActivity {
     public void onContentFinish(){
         saveContent.setClickable(true);
         optimizeContent.setClickable(true);
+        if (isContinuous){
+            messageList.add(new ChatRequest.Message(markdownContent.toString(), "system", AiName));
+        }
     }
 
     @Override

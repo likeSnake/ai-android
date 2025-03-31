@@ -140,4 +140,9 @@
     <string name="dialog_custom_model_help">Custom model names entered here will be appended to drop-down list. Use \';\' to separate different models and use \'*\' to indicate a vision model. \n\nExample: gpt-4o*;gpt-4-0613</string>
     <string name="text_gpt_conf_error">Please check GPT api configuration</string>
 
+    <string name="editor_create_act_hint1">生成文案</string>
+    <string name="editor_create_act_hint3">优化文案</string>
+    <string name="editor_create_act_hint2">描述一下你想要的文案，简单介绍下产品，以及想要的字数。</string>
+    <string name="editor_create_act_hint4">描述一下你想如何优化当前的文案。</string>
+
 </resources>
