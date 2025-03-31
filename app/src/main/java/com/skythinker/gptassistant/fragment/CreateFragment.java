@@ -35,13 +35,17 @@ import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
+@SuppressLint("NonConstantResourceId")
 public class CreateFragment extends Fragment implements View.OnClickListener {
 
     private Unbinder unbinder;
     @BindView(R.id.recyclerView1)
     RecyclerView recyclerView1;
+    @BindView(R.id.createTemplate)
+    TextView createTemplate;
 
     private AlignmentBoxAdapter adapter;
     private List<TextTemplate> data;
@@ -66,6 +70,15 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
     }
     public void updateData(){
         adapter.updateData(data);
+    }
+
+    @OnClick({R.id.createTemplate})
+    public void myClickListener(View view) {
+        switch (view.getId()){
+            case R.id.createTemplate:
+
+                break;
+        }
     }
 
     public void refreshData(){
