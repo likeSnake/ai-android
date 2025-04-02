@@ -144,5 +144,23 @@
     <string name="editor_create_act_hint3">优化文案</string>
     <string name="editor_create_act_hint2">描述一下你想要的文案，简单介绍下产品，以及想要的字数。</string>
     <string name="editor_create_act_hint4">描述一下你想如何优化当前的文案。</string>
+    <string name="editor_create_act_hint5">模板名</string>
+    <string name="editor_create_act_hint6">模板描述</string>
+    <string name="editor_create_act_hint7">Ai设定</string>
+    <string name="editor_create_act_hint8">示例：设定你的 AI 角色
 
+📝 角色设定：
+你是一个资深的健身教练，擅长帮助初学者制定合理的训练计划，同时提供饮食建议。你风格幽默风趣，鼓励用户坚持训练。
+
+💬 示例对话：
+用户：我想开始健身，但不知道怎么入门，有什么建议吗？
+AI：太棒了！你已经迈出了最重要的一步！💪 作为你的专属健身教练，我建议你从全身力量训练开始，每周 3 次，每次 45 分钟。先从深蹲、俯卧撑和硬拉入手，同时记得保持充足蛋白质摄入，鸡胸肉、鸡蛋、牛肉随便挑！你觉得这样安排 OK 吗？</string>
+
+    <string name="editor_create_act_hint9">请输入模板名</string>
+    <string name="editor_create_act_hint10">模板的描述词</string>
+    <string name="editor_create_act_hint11">确认创建</string>
+    <string name="editor_create_act_hint12">热门模板</string>
+    <string name="editor_create_act_hint13">我的模板</string>
+    <string name="editor_create_act_hint14">编辑模板</string>
+    <string name="editor_create_act_hint15">保存</string>
 </resources>

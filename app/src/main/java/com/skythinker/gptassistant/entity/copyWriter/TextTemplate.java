@@ -20,6 +20,8 @@ public class TextTemplate implements Serializable{
     private String sharerId;    // 分享者id
     @ColumnInfo(name = "useNumber")
     private String useNumber; // 使用次数
+    @ColumnInfo(name = "permissionLevel")
+    private int permissionLevel;    // 权限等级 0-共享 1-私有 2-封禁
 
     public int getId() {
         return id;
@@ -67,5 +69,13 @@ public class TextTemplate implements Serializable{
 
     public void setUseNumber(String useNumber) {
         this.useNumber = useNumber;
+    }
+
+    public int getPermissionLevel() {
+        return permissionLevel;
+    }
+
+    public void setPermissionLevel(int permissionLevel) {
+        this.permissionLevel = permissionLevel;
     }
 }

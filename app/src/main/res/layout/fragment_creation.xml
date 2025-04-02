@@ -162,6 +162,18 @@
         </LinearLayout>
     </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bootomnav3"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout2"
+        android:background="#F9F4F4"
+        android:visibility="gone"
+        android:theme="@style/footButton"
+        android:elevation="0dp"
+        app:elevation="0dp"
+        app:menu="@menu/bottom_item"/>
+
     <RelativeLayout
         android:id="@+id/layout3"
         android:layout_width="match_parent"
@@ -175,12 +187,22 @@
             android:layout_height="20dp"
             android:src="@drawable/ic_remen"/>
         <TextView
+            android:id="@+id/textNameTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="热门模板"
             android:layout_toEndOf="@+id/image1"
             android:textSize="16sp"
             android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/switchTemp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_qiehuan"
+            android:layout_toEndOf="@+id/textNameTitle"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"/>
 
         <TextView
             android:id="@+id/createTemplate"
@@ -192,10 +214,27 @@
             android:textSize="14sp"
             android:textColor="@color/colorPrimary"/>
     </RelativeLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView1"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout3"
-        android:layout_margin="20dp" />
+        android:layout_margin="20dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+
+
+
 </RelativeLayout>

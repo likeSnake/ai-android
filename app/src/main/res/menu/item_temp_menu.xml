@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group3">
+        <item
+            android:id="@+id/menu_hot_temp"
+            android:title="热门模板" />
+    </group>
+
+    <!-- 添加分割线 -->
+    <group
+        android:id="@+id/group2">
+        <item
+            android:id="@+id/menu_my_temp"
+            android:title="我的模板" />
+    </group>
+
+
+</menu>

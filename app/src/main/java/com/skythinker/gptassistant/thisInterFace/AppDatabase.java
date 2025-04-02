@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import com.skythinker.gptassistant.entity.copyWriter.TextTemplate;
 
-@Database(entities = {TextTemplate.class}, version = 1, exportSchema = false)
+@Database(entities = {TextTemplate.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract DaoInterFace qrCodeInfoDao();
 

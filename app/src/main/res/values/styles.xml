@@ -10,4 +10,24 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:background">@color/gray4</item>
     </style>
+
+    <!--popMenu的Style-->
+    <style name="CustomPopMenuStyle" >
+        <item name="android:itemBackground">@color/basic_top_b</item>
+        <item name="android:dropDownListViewStyle">@style/popmenuDivier</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/popmeuText</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/popmeuText</item>
+    </style>
+    <!--popmenu的字体颜色-->
+    <style name="popmeuText">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!--popMenu分割线的颜色-->
+    <style name="popmenuDivier">
+        <item name="android:divider">@color/black</item>
+        <item name="android:dividerHeight">1px</item>
+    </style>
+
 </resources>
