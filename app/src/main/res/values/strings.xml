@@ -163,4 +163,9 @@ AI：太棒了！你已经迈出了最重要的一步！💪 作为你的专属�
     <string name="editor_create_act_hint13">我的模板</string>
     <string name="editor_create_act_hint14">编辑模板</string>
     <string name="editor_create_act_hint15">保存</string>
+
+    <string name="cancel">取消</string>
+    <string name="determine">确定</string>
+    <string name="create_no">依然返回</string>
+    <string name="create_yes">点击新建</string>
 </resources>

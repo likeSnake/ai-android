@@ -4,6 +4,7 @@ package com.skythinker.gptassistant.fragment;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_GET_TEMPLATE;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_GET_TEMPLATE_BY_ID;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_INFO_URL;
+import static com.skythinker.gptassistant.util.MyUtil.APP_USER_TEMPLATE_URL;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.skythinker.gptassistant.R;
+import com.skythinker.gptassistant.activity.LoginActivity;
 import com.skythinker.gptassistant.activity.mainUI.CreateTemplateAct;
 import com.skythinker.gptassistant.activity.mainUI.EditorCreateAct;
 import com.skythinker.gptassistant.entity.base.BaseEntity;
@@ -37,6 +39,7 @@ import com.skythinker.gptassistant.entity.copyWriter.TextTemplate;
 import com.skythinker.gptassistant.util.HttpUtils;
 import com.skythinker.gptassistant.util.MyToastUtil;
 import com.skythinker.gptassistant.util.MyUtil;
+import com.skythinker.gptassistant.util.NoticeUtil;
 import com.tencent.mmkv.MMKV;
 
 import java.util.ArrayList;
@@ -152,7 +155,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
                         if (baseEntity.code == MyUtil.HTTP_CODE_TOKEN_OVERDUE){
                             // token过期
                             MyToastUtil.showSuccessful("登录状态过期，请重新登录");
-
+                            startActivity(new Intent(getContext(), LoginActivity.class));
                         }else {
                             MyToastUtil.showError(baseEntity.msg);
                         }
@@ -264,13 +267,23 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
                     }
                 });
                 if (permissionLevel == 0){
-                    holder.tempShare.setText("已分享");
+                    holder.tempShare.setText("已共享");
                     holder.tempShare.setTextColor(getContext().getColor(R.color.gray7));
                 }else {
                     holder.tempShare.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            NoticeUtil.showDialogChooseCountdown(getContext(), "是否共享该模板，共享后所有人都能搜索看到你创建的模板", "共享模板",0,new NoticeUtil.NoticeCallback() {
+                                @Override
+                                public void onYes() {
+                                    dd(data);
+                                }
 
+                                @Override
+                                public void onNo() {
+
+                                }
+                            });
                         }
                     });
                 }
@@ -309,13 +322,39 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    public void dd(TextTemplate textTemplate){
+        showLoading();
+        textTemplate.setPermissionLevel(0);
+        String json = new Gson().toJson(textTemplate);
+        HttpUtils.sendPostRequest(APP_USER_TEMPLATE_URL, json, new HttpUtils.HttpCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                BaseEntity<Integer> baseEntity = new Gson().fromJson(result, new TypeToken<BaseEntity<Integer>>(){}.getType());
+                if (baseEntity.code != MyUtil.HTTP_CODE_SUCCESSFUL){
+                    MyToastUtil.showError(baseEntity.msg);
+                }else {
+                    refreshData();
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                MyToastUtil.showError(e.getMessage());
+            }
+        });
+    }
+
     public void showLoading(){
-        recyclerView1.setVisibility(View.GONE);
-        progressBar1.setVisibility(View.VISIBLE);
+        getActivity().runOnUiThread(()->{
+            recyclerView1.setVisibility(View.GONE);
+            progressBar1.setVisibility(View.VISIBLE);
+        });
     }
     public void hideLoading(){
-        recyclerView1.setVisibility(View.VISIBLE);
-        progressBar1.setVisibility(View.GONE);
+        getActivity().runOnUiThread(()->{
+            recyclerView1.setVisibility(View.VISIBLE);
+            progressBar1.setVisibility(View.GONE);
+        });
     }
 
     @Override
