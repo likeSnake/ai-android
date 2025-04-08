@@ -33,6 +33,7 @@ import com.skythinker.gptassistant.R;
 import com.skythinker.gptassistant.activity.LoginActivity;
 import com.skythinker.gptassistant.activity.mainUI.CreateTemplateAct;
 import com.skythinker.gptassistant.activity.mainUI.EditorCreateAct;
+import com.skythinker.gptassistant.activity.mainUI.HistoryAct;
 import com.skythinker.gptassistant.entity.base.BaseEntity;
 import com.skythinker.gptassistant.entity.base.BaseListEntity;
 import com.skythinker.gptassistant.entity.copyWriter.TextTemplate;
@@ -95,7 +96,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
         adapter.updateData(nowTempType == 0?hotData:myData);
     }
 
-    @OnClick({R.id.createTemplate,R.id.switchTemp})
+    @OnClick({R.id.createTemplate,R.id.switchTemp,R.id.layout11})
     public void myClickListener(View view) {
         switch (view.getId()){
             case R.id.createTemplate:
@@ -103,6 +104,9 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.switchTemp:
                 showSwitchTemp(view);
+                break;
+            case R.id.layout11:
+                startActivity(new Intent(getContext(), HistoryAct.class));
                 break;
         }
     }

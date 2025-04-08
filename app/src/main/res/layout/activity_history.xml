@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F6F7"
+    android:fitsSystemWindows="true"
     tools:context=".activity.HistoryActivity">
 
     <LinearLayout
@@ -35,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/history_activity_title"
+                android:text="历史记录"
                 android:textColor="#3C3C3C"
                 android:textSize="22sp" />
 
@@ -71,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
                     android:ems="10"
-                    android:hint="@string/history_search_hint"
+                    android:hint="搜索"
                     android:inputType="text"
                     android:paddingHorizontal="15dp"
                     android:paddingVertical="8dp"

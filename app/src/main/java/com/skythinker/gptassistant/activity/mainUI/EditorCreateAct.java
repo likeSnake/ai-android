@@ -19,7 +19,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skythinker.gptassistant.R;
 import com.skythinker.gptassistant.entity.base.ChatRequest;
 import com.skythinker.gptassistant.entity.base.ChatStreamClient;
+import com.skythinker.gptassistant.entity.base.HistoryEntity;
 import com.skythinker.gptassistant.entity.copyWriter.TextTemplate;
+import com.skythinker.gptassistant.thisInterFace.AppDatabase;
 import com.skythinker.gptassistant.util.MyToastUtil;
 
 import java.io.IOException;
@@ -83,6 +85,7 @@ public class EditorCreateAct extends AppCompatActivity {
     private boolean isFinish = false;
     private boolean isContinuous = true;    // 连续对话
     private String AiName = "小助手";
+    private String firstMsg = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +117,7 @@ public class EditorCreateAct extends AppCompatActivity {
         switch (view.getId()){
             case R.id.saveContent:
                 if (isFinish){
-
+                    saveCont();
                 }else {
                     MyToastUtil.showError("请等待文案生成");
                 }
@@ -127,6 +130,24 @@ public class EditorCreateAct extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    public void saveCont(){
+        HistoryEntity historyEntity = new HistoryEntity();
+        historyEntity.setTitle(firstMsg);
+        historyEntity.setContent(myText.getText().toString());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                AppDatabase db = AppDatabase.getInstance(EditorCreateAct.this);
+                db.qrCodeInfoDao().insertHistory(historyEntity);
+
+                runOnUiThread(()->{
+                    MyToastUtil.showSuccessful("已保存");
+                });
+            }
+        }).start();
     }
 
     // type:0生成 1优化
@@ -164,7 +185,8 @@ public class EditorCreateAct extends AppCompatActivity {
             }
         });
         submit.setOnClickListener((v)->{
-            String s_prompt = promptText.getText().toString();
+            firstMsg = promptText.getText().toString();
+            String s_prompt = firstMsg;
             if (s_prompt.isEmpty()){
                 MyToastUtil.showError("请先输入提示内容");
                 return;
