@@ -17,6 +17,7 @@ public class MyUtil {
     public static final String APP_USER_GET_TEMPLATE_BY_ID = "/user/getTemplateByUserId";
     public static final String APP_APPINFO_URL = "/appInfo/getAppInfo";
     public static final String APP_USER_TEMPLATE_URL = "/user/createTemplate";
+    public static final String APP_UPDATE_PWD_URL = "/user/updatePwd";
     public static final int HTTP_CODE_SUCCESSFUL = 1;
     public static final int HTTP_CODE_ERROR = -1;
     public static final int HTTP_CODE_TOKEN_OVERDUE = -3;

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.skythinker.gptassistant.thisInterFace.AppDatabase;
 import com.skythinker.gptassistant.util.MyToastUtil;
 import com.skythinker.gptassistant.util.MyUtil;
 import com.skythinker.gptassistant.util.PreferencesUtil;
@@ -46,8 +47,7 @@ public class App extends Application
     }
 
     public void initDate(){
-
-
+        AppDatabase.initAppDatabase(App.this);
     }
     //初始化google ads
     public void initGoogleAds(){

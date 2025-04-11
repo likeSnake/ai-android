@@ -140,7 +140,7 @@ public class EditorCreateAct extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                AppDatabase db = AppDatabase.getInstance(EditorCreateAct.this);
+                AppDatabase db = AppDatabase.getInstance();
                 db.qrCodeInfoDao().insertHistory(historyEntity);
 
                 runOnUiThread(()->{

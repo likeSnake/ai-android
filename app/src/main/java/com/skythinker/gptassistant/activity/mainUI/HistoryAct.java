@@ -61,7 +61,7 @@ public class HistoryAct extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                AppDatabase db = AppDatabase.getInstance(HistoryAct.this);
+                AppDatabase db = AppDatabase.getInstance();
                 historyEntityList = db.qrCodeInfoDao().getAllHistory();
                 runOnUiThread(()->{
                     initAdapter();

@@ -168,4 +168,5 @@ AI：太棒了！你已经迈出了最重要的一步！💪 作为你的专属�
     <string name="determine">确定</string>
     <string name="create_no">依然返回</string>
     <string name="create_yes">点击新建</string>
+    <string name="input_number_english">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.@#*_</string>
 </resources>

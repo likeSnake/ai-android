@@ -1,5 +1,9 @@
 package com.skythinker.gptassistant.entity.user;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,14 +12,23 @@ import java.util.Date;
  *
  * @date: 2024/10/25
  */
+
+@Entity(tableName = "user")
 public class User implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
     private Integer id;
+    @ColumnInfo(name = "userName")
     private String userName; // 用户名
+    @ColumnInfo(name = "password")
     private String password; // 密码
+    @ColumnInfo(name = "phone_number")
     private String phone_number; // 用户手机号
+    @ColumnInfo(name = "created_at")
     private String created_at; // 用户注册时间
+    @ColumnInfo(name = "updated_at")
     private String updated_at; // 用户信息最后一次更新的时间。
+    @ColumnInfo(name = "status")
     private int status; // 用户状态 0正常 1封禁
 
     public Integer getId() {
