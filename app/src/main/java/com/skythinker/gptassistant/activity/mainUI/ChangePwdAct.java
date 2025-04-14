@@ -1,14 +1,22 @@
 package com.skythinker.gptassistant.activity.mainUI;
 
+import static com.skythinker.gptassistant.util.HttpUtils.sendGetRequest;
+import static com.skythinker.gptassistant.util.HttpUtils.sendGetRequestNormal;
+import static com.skythinker.gptassistant.util.MyUtil.API_MSG_SEND;
 import static com.skythinker.gptassistant.util.MyUtil.APP_UPDATE_PWD_URL;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_TEMPLATE_URL;
+import static com.skythinker.gptassistant.util.MyUtil.MSG_API_ID;
+import static com.skythinker.gptassistant.util.MyUtil.MSG_API_KEY;
+import static com.skythinker.gptassistant.util.MyUtil.TOURIST;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -19,12 +27,16 @@ import com.skythinker.gptassistant.R;
 import com.skythinker.gptassistant.activity.LoginActivity;
 import com.skythinker.gptassistant.entity.SignInInfo;
 import com.skythinker.gptassistant.entity.base.BaseEntity;
+import com.skythinker.gptassistant.thisInterFace.AppDatabase;
 import com.skythinker.gptassistant.util.HttpUtils;
 import com.skythinker.gptassistant.util.MyToastUtil;
 import com.skythinker.gptassistant.util.MyUtil;
+import com.skythinker.gptassistant.util.PreferencesUtil;
 import com.tencent.mmkv.MMKV;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -34,8 +46,19 @@ import butterknife.Unbinder;
 public class ChangePwdAct extends AppCompatActivity {
     private Unbinder unbinder;
 
+    @BindView(R.id.resetPPhoneED)
+    EditText resetPPhoneED;
+    @BindView(R.id.resetPasswordOneED)
+    EditText resetPasswordOneED;
+    @BindView(R.id.resetPasswordTwoED)
+    EditText resetPasswordTwoED;
+    @BindView(R.id.resetPCodeED)
+    EditText resetPCodeED;
+
     private String newPwd;
     private String reNewPwd;
+    private String userPhone;
+    private String mobile_code = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +76,65 @@ public class ChangePwdAct extends AppCompatActivity {
     }
 
     public void initData(){
+         userPhone = (String)PreferencesUtil.getParam(TOURIST,"");
+         if (userPhone==null){
+             MyToastUtil.showError("获取用户信息出差!");
+             finish();
+         }
+        resetPPhoneED.setText(userPhone);
+    }
 
+    @OnClick({R.id.resetPGetCodeBut})
+    public void myListener(View view){
+        switch (view.getId()){
+            case R.id.resetPGetCodeBut:
+                sendMsgCode();
+                break;
+        }
+    }
+
+    public void sendMsgCode(){
+        if (userPhone.isEmpty()){
+            MyToastUtil.showSuccessful("请先输入手机号");
+        }
+        mobile_code = String.valueOf((int)((Math.random()*9+1)*100000));
+        String msgINfo = "&mobile="+userPhone+"&content=您的验证码是："+mobile_code+"。请不要把验证码泄露给其他人。";
+        String urlString = API_MSG_SEND + msgINfo;
+        sendGetRequestNormal(urlString, new HttpUtils.HttpCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                System.out.println(result);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
     }
 
     public void submit(){
-        if (!newPwd.equals(reNewPwd)){
-            MyToastUtil.showSuccessful("两次密码输入不一致!");
+        String passwordOne = resetPasswordOneED.getText().toString();
+        String passwordTwo = resetPasswordTwoED.getText().toString();
+        String phoneCode = resetPCodeED.getText().toString();
+        if (mobile_code.isEmpty()){
+            MyToastUtil.showError("请输入验证码!");
+            return;
         }
+        if (!phoneCode.equals(mobile_code)){
+            MyToastUtil.showError("验证码错误!");
+            return;
+        }
+        if (!passwordOne.equals(passwordTwo)){
+            MyToastUtil.showSuccessful("两次密码输入不一致!");
+            return;
+        }
+
+
         SignInInfo info = new SignInInfo();
-        info.setPhone(phone);
+        info.setPhone(userPhone);
         info.setCheckType(4); // 4--修改密码
-        info.setPassword(pwd);// 原始密码
+        info.setPassword(passwordTwo);// 原始密码
         info.setNewPassword(newPwd);// 新密码
 
         String json = new Gson().toJson(info);

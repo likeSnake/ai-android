@@ -24,6 +24,7 @@ import com.skythinker.gptassistant.entity.user.User;
 import com.skythinker.gptassistant.util.HttpUtils;
 import com.skythinker.gptassistant.util.MyToastUtil;
 import com.skythinker.gptassistant.util.MyUtil;
+import com.skythinker.gptassistant.util.SignInUtil;
 import com.tencent.mmkv.MMKV;
 
 import butterknife.BindView;
@@ -111,7 +112,7 @@ public class LoginActivity extends AppCompatActivity{
         HttpUtils.sendGetRequest(APP_USER_INFO_URL, new HttpUtils.HttpCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                BaseEntity baseEntity = new Gson().fromJson(result, BaseEntity.class);
+                BaseEntity<User> baseEntity = new Gson().fromJson(result, new TypeToken<BaseEntity<User>>(){}.getType());
                 if (baseEntity.code != MyUtil.HTTP_CODE_SUCCESSFUL){
                     if (baseEntity.code == MyUtil.HTTP_CODE_TOKEN_OVERDUE){
                         // token过期
@@ -121,9 +122,16 @@ public class LoginActivity extends AppCompatActivity{
                         MyToastUtil.showError(baseEntity.msg);
                     }
                 }else {
-                    MyToastUtil.showSuccessful("登录成功");
-                    MMKV.defaultMMKV().encode(MyUtil.IS_LOGIN,true);
-                    startMain();
+                    User user = baseEntity.getData();
+                    if (user!=null){
+                        MyToastUtil.showSuccessful("登录成功");
+                        MMKV.defaultMMKV().encode(MyUtil.IS_LOGIN,true);
+                        SignInUtil.signInSuccess(user);
+                        startMain();
+                    }else {
+                        MyToastUtil.showError("出错了，请重试");
+                    }
+
                 }
             }
 

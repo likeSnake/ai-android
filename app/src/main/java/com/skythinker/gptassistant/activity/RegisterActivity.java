@@ -1,5 +1,7 @@
 package com.skythinker.gptassistant.activity;
 
+import static com.skythinker.gptassistant.util.HttpUtils.sendGetRequestNormal;
+import static com.skythinker.gptassistant.util.MyUtil.API_MSG_SEND;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_REGISTER_URL;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean isUserPwdEmpty = true;
     private boolean isUserPhoneEmpty = true;
     private boolean isUserCodeEmpty = true;
+    private String mobile_code = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,9 +197,30 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void getVerificationCode(){
+        sendMsgCode();
         new SmsCodeHelper(signInVGetCodeBut, 60).smsCodeGet(new SmsCodeHelper.SmsTimerCall() {
             @Override
             public void call(boolean finished) {
+
+            }
+        });
+    }
+    public void sendMsgCode(){
+        if (isUserPhoneEmpty){
+            MyToastUtil.showSuccessful("请先输入手机号");
+        }
+        String userPhone = inputPhone.getText().toString().trim();
+        mobile_code = String.valueOf((int)((Math.random()*9+1)*100000));
+        String msgINfo = "&mobile="+userPhone+"&content=您的验证码是："+mobile_code+"。请不要把验证码泄露给其他人。";
+        String urlString = API_MSG_SEND + msgINfo;
+        sendGetRequestNormal(urlString, new HttpUtils.HttpCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                System.out.println(result);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
 
             }
         });

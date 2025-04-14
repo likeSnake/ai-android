@@ -7,4 +7,202 @@
     android:background="#F9F4F4"
     android:fitsSystemWindows="true">
 
+    <LinearLayout
+        android:id="@+id/titleLayout"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/my_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon"/>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="未登录"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/titleLayout"
+        android:background="@drawable/shape_white"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:id="@+id/share_layout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/background"
+
+            >
+
+            <ImageView
+                android:id="@+id/pc_share_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:src="@mipmap/icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@+id/pc_share_icon"
+                android:text="Share"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/right_gray" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="#2196F3" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/star"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/background"
+            >
+
+            <ImageView
+                android:id="@+id/pc_share_icon2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/icon"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Give us a thumbs up"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_toEndOf="@+id/pc_share_icon2"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"/>
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:src="@mipmap/right_gray"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="#2196F3" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/set_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/background"
+            >
+
+            <ImageView
+                android:id="@+id/pc_share_icon3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/icon"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opinion feedback"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_toEndOf="@+id/pc_share_icon3"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="#2196F3" />
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:src="@mipmap/right_gray"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/protocol"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/background"
+            >
+
+            <ImageView
+                android:id="@+id/pc_share_icon5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/icon"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Privacy policy"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_toEndOf="@+id/pc_share_icon5"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"/>
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:src="@mipmap/right_gray"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
 </RelativeLayout>

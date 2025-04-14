@@ -4,6 +4,7 @@ package com.skythinker.gptassistant.fragment;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_GET_TEMPLATE;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.skythinker.gptassistant.R;
+import com.skythinker.gptassistant.activity.mainUI.ChangePwdAct;
 import com.skythinker.gptassistant.entity.base.BaseListEntity;
 import com.skythinker.gptassistant.entity.copyWriter.TextTemplate;
 import com.skythinker.gptassistant.util.HttpUtils;
@@ -29,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -42,7 +45,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         unbinder = ButterKnife.bind(this, rootView);
         initView(rootView);
         initData();
-        initLinsenner();
         return rootView;
     }
 
@@ -53,8 +55,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public void initLinsenner(){
-
+    @OnClick({R.id.share_layout})
+    public void myListener(View view){
+        switch (view.getId()){
+            case R.id.share_layout:
+                startActivity(new Intent(getActivity(), ChangePwdAct.class));
+                break;
+        }
     }
 
 

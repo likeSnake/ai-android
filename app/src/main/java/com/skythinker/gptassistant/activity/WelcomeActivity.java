@@ -70,6 +70,10 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
                 BaseEntity<MyToken> baseEntity = new Gson().fromJson(result, new TypeToken<BaseEntity<MyToken>>(){}.getType());
+                if (baseEntity == null){
+                    MyToastUtil.showError("返回为空");
+                    return;
+                }
                 if (baseEntity.code != MyUtil.HTTP_CODE_SUCCESSFUL){
                     if (baseEntity.code == MyUtil.HTTP_CODE_TOKEN_OVERDUE){
                         // token过期

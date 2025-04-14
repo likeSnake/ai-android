@@ -32,6 +32,37 @@ public class HttpUtils {
     private static final String TAG = "HttpUtils请求";
 
     // get请求
+    public static void sendGetRequestNormal(String urlString, final HttpCallback<String> callback) {
+        //OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS) // 设置连接超时为10秒
+                .readTimeout(30, TimeUnit.SECONDS) // 设置读取超时为30秒
+                .writeTimeout(30, TimeUnit.SECONDS) // 设置写入超时为30秒
+                .build();
+
+        Request request = new Request.Builder()
+                .url(urlString)
+                .get()
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e(TAG, "Request failed: " + e.getMessage());
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseString = response.body().string();
+                Log.d(TAG, "Response: " + responseString);
+                callback.onSuccess(responseString);
+
+            }
+        });
+    }
+
+    // get请求
     public static void sendGetRequest(String urlString, final HttpCallback<String> callback) {
         String url = APP_BASE_URL+urlString;
         String token = MMKV.defaultMMKV().decodeString(MyUtil.ACCESS_TOKEN,"");

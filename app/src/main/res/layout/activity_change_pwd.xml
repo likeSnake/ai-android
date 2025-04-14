@@ -95,7 +95,7 @@
                 android:id="@+id/resetPPhoneED"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
+                android:focusableInTouchMode="false"
                 android:hint="手机号"
                 android:inputType="number"
                 android:textColor="@color/black"

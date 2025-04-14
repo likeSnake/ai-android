@@ -24,6 +24,10 @@ public class MyUtil {
     public static final String ACCESS_TOKEN = "access_token";
     public static final String REFRESH_TOKEN = "refresh_token";
     public static final String IS_LOGIN = "isLogin"; // 保存是否登录
+    public static final String TOURIST = "TOURIST"; // 用户手机号
+    public static final String API_MSG_SEND = "http://106.ihuyi.com/webservice/sms.php?method=Submit&account="+MyUtil.MSG_API_ID+"&password="+MyUtil.MSG_API_KEY;
+    public static final String MSG_API_ID = "C87297789";
+    public static final String MSG_API_KEY = "352a4dc676729706ebd7c1eaecfaaa8a";
 
     public static void MyLog(Object s){
         System.out.println("----*--------*"+s);
