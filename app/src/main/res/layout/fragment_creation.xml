@@ -105,8 +105,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="文案生成"
+                    android:text="文章写作"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:gravity="center"/>
 
@@ -137,9 +138,21 @@
                 app:cardElevation="0dp"
                 app:cardBackgroundColor="@color/white">
                 <RelativeLayout
+                    android:id="@+id/layoutPaper"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#E6E9C1"/>
+                    android:background="#E6E9C1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="论文润色"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"/>
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 

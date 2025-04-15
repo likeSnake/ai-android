@@ -1,14 +1,19 @@
 package com.skythinker.gptassistant.activity.mainUI;
 
+import static android.view.View.GONE;
 import static com.skythinker.gptassistant.entity.base.ChatStreamClient.sendChatStream;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -77,6 +82,12 @@ public class EditorCreateAct extends AppCompatActivity {
     TextView saveContent;
     @BindView(R.id.optimizeContent)
     TextView optimizeContent;
+    @BindView(R.id.textCount)
+    TextView textCount;
+    @BindView(R.id.textLayoutBot)
+    LinearLayout textLayoutBot;
+    @BindView(R.id.ic_copy)
+    ImageView ic_copy;
 
     private StringBuilder markdownContent = new StringBuilder();
     private TextTemplate nowTemplate;
@@ -112,7 +123,7 @@ public class EditorCreateAct extends AppCompatActivity {
     }
 
     @SuppressLint("NonConstantResourceId")
-    @OnClick({R.id.saveContent,R.id.optimizeContent})
+    @OnClick({R.id.saveContent,R.id.optimizeContent,R.id.ic_copy})
     public void myClickListener(View view) {
         switch (view.getId()){
             case R.id.saveContent:
@@ -129,8 +140,19 @@ public class EditorCreateAct extends AppCompatActivity {
                     MyToastUtil.showError("请等待文案生成");
                 }
                 break;
+            case R.id.ic_copy:
+                copyToClipboard(this,stripMarkdown(myText.getText().toString()));
+                break;
         }
     }
+
+    public void copyToClipboard(Context context, String text) {
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("label", text);
+        clipboard.setPrimaryClip(clip);
+        MyToastUtil.showSuccessful("已复制");
+    }
+
 
     public void saveCont(){
         HistoryEntity historyEntity = new HistoryEntity();
@@ -170,7 +192,7 @@ public class EditorCreateAct extends AppCompatActivity {
         Button submit = view.findViewById(R.id.dialogInputHSubmit);
         EditText promptText = view.findViewById(R.id.promptText);
         if (type == 0){
-            textTitle.setText(getString(R.string.editor_create_act_hint1));
+            textTitle.setText(nowTemplate.getTitle());
             promptText.setHint(getString(R.string.editor_create_act_hint2));
         }else {
             textTitle.setText(getString(R.string.editor_create_act_hint3));
@@ -219,6 +241,7 @@ public class EditorCreateAct extends AppCompatActivity {
                 runOnUiThread(() -> {
                     markdownContent.append(content);
                     markwon.setMarkdown(myText, markdownContent.toString());
+                    textCount.setText(String.valueOf(stripMarkdown(myText.getText().toString()).length()));
                 });
             }
 
@@ -243,6 +266,19 @@ public class EditorCreateAct extends AppCompatActivity {
 
             }
         });
+    }
+
+    public static String stripMarkdown(String markdown) {
+        return markdown
+                .replaceAll("(?m)^#+\\s*", "") // 标题
+                .replaceAll("(!)?\\[.*?]\\(.*?\\)", "") // 链接和图片
+                .replaceAll("(?<=\\s|^)\\*\\*(.*?)\\*\\*", "$1") // 粗体
+                .replaceAll("(?<=\\s|^)\\*(.*?)\\*", "$1") // 斜体
+                .replaceAll("`{1,3}[^`]*`{1,3}", "") // 代码块或行内代码
+                .replaceAll(">\\s*", "") // 引用
+                .replaceAll("[-*_]{3,}", "") // 分割线
+                .replaceAll("`", "") // 清除遗留的 `
+                .trim();
     }
 
     public void showLoading(){

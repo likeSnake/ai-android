@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F9F4F4"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".fragment.HomeFragment"
+    >
 
     <LinearLayout
         android:id="@+id/titleLayout"
@@ -42,8 +44,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/titleLayout"
         android:background="@drawable/shape_white"
@@ -63,8 +65,9 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
+                android:padding="1.5dp"
                 android:layout_marginStart="20dp"
-                android:src="@mipmap/icon" />
+                android:src="@drawable/ic_change_password" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -72,15 +75,16 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="15dp"
                 android:layout_toEndOf="@+id/pc_share_icon"
-                android:text="Share"
+                android:text="修改密码"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="23dp"
-                android:layout_height="23dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
                 android:src="@mipmap/right_gray" />
 
 
@@ -93,7 +97,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/star"
+            android:id="@+id/layout_history"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/background"
@@ -103,13 +107,13 @@
                 android:id="@+id/pc_share_icon2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@mipmap/icon"
+                android:src="@drawable/ic_history"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Give us a thumbs up"
+                android:text="历史记录"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_toEndOf="@+id/pc_share_icon2"
@@ -117,10 +121,11 @@
                 android:layout_marginStart="15dp"/>
 
             <ImageView
-                android:layout_width="23dp"
+                android:layout_width="20dp"
                 android:layout_height="23dp"
                 android:src="@mipmap/right_gray"
                 android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp"
                 android:layout_centerVertical="true"/>
 
             <View
@@ -162,9 +167,10 @@
                 android:background="#2196F3" />
 
             <ImageView
-                android:layout_width="23dp"
+                android:layout_width="20dp"
                 android:layout_height="23dp"
                 android:src="@mipmap/right_gray"
+                android:layout_marginEnd="15dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"/>
 
@@ -194,9 +200,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="15dp"/>
             <ImageView
-                android:layout_width="23dp"
+                android:layout_width="20dp"
                 android:layout_height="23dp"
                 android:src="@mipmap/right_gray"
+                android:layout_marginEnd="15dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"/>
 

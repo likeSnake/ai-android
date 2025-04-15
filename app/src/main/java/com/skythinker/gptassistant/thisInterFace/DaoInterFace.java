@@ -43,6 +43,9 @@ public interface DaoInterFace {
     @Query("SELECT * FROM user")
     List<User> getAllUser();
 
+    @Query("SELECT * FROM user LIMIT 1")
+    User getFirstUser();
+
     @Query("SELECT * FROM user WHERE id = :id")
     User getUserById(int id);
 

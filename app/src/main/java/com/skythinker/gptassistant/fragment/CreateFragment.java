@@ -5,6 +5,8 @@ import static com.skythinker.gptassistant.util.MyUtil.APP_USER_GET_TEMPLATE;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_GET_TEMPLATE_BY_ID;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_INFO_URL;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_TEMPLATE_URL;
+import static com.skythinker.gptassistant.util.MyUtil.TEMP_TYPE1;
+import static com.skythinker.gptassistant.util.MyUtil.TEMP_TYPE2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -96,7 +98,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
         adapter.updateData(nowTempType == 0?hotData:myData);
     }
 
-    @OnClick({R.id.createTemplate,R.id.switchTemp,R.id.layout11})
+    @OnClick({R.id.createTemplate,R.id.switchTemp,R.id.layout11,R.id.layoutPaper})
     public void myClickListener(View view) {
         switch (view.getId()){
             case R.id.createTemplate:
@@ -106,9 +108,29 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
                 showSwitchTemp(view);
                 break;
             case R.id.layout11:
-                startActivity(new Intent(getContext(), HistoryAct.class));
+                checkTempGoTo(0);
+                break;
+            case R.id.layoutPaper:
+                checkTempGoTo(1);
                 break;
         }
+    }
+
+    public void checkTempGoTo(int type){
+        TextTemplate data = new TextTemplate();
+        if (type == 0){
+            data.setTitle("文章写作");
+            data.setContent(TEMP_TYPE2);
+            data.setPrompt(TEMP_TYPE2);
+
+        }else if (type == 1){
+            data.setTitle("论文润色");
+            data.setContent(TEMP_TYPE1);
+            data.setPrompt(TEMP_TYPE1);
+        }
+        Intent intent = new Intent(getContext(), EditorCreateAct.class);
+        intent.putExtra("textTemplate",data);
+        getActivity().startActivity(intent);
     }
 
     public void showSwitchTemp(View view){

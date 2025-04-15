@@ -19,6 +19,9 @@ public class SignInUtil {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                // 只保留一个用户
+                db.qrCodeInfoDao().deleteAllUsers();
+
                 db.qrCodeInfoDao().deleteAllUsers();
                 db.qrCodeInfoDao().insert(user);
 

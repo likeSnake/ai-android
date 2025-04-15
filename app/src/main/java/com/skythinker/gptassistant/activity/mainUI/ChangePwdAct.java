@@ -84,11 +84,14 @@ public class ChangePwdAct extends AppCompatActivity {
         resetPPhoneED.setText(userPhone);
     }
 
-    @OnClick({R.id.resetPGetCodeBut})
+    @OnClick({R.id.resetPGetCodeBut,R.id.resetPBackIV})
     public void myListener(View view){
         switch (view.getId()){
             case R.id.resetPGetCodeBut:
                 sendMsgCode();
+                break;
+            case R.id.resetPBackIV:
+                finish();
                 break;
         }
     }
