@@ -279,9 +279,11 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
             }
             String title = data.getTitle();
             String content = data.getContent();
+            String useNumber = data.getUseNumber();
             int permissionLevel = data.getPermissionLevel();
             holder.content_item.setText(content);
             holder.title_item.setText(title);
+            holder.textUsedCount.setText(useNumber);
             if (nowTempType == 1){
                 holder.layoutBottom.setVisibility(View.VISIBLE);
                 holder.tempEdit.setOnClickListener(new View.OnClickListener() {
@@ -333,7 +335,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
             return dataList.size();
         }
         class ViewHolder2 extends RecyclerView.ViewHolder {
-            TextView title_item,content_item,tempShare,tempEdit;
+            TextView title_item,content_item,tempShare,tempEdit,textUsedCount;
             LinearLayout layoutBottom;
 
             public ViewHolder2(View itemView) {
@@ -343,6 +345,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
                 layoutBottom = itemView.findViewById(R.id.layoutBottom);
                 tempShare = itemView.findViewById(R.id.tempShare);
                 tempEdit = itemView.findViewById(R.id.tempEdit);
+                textUsedCount = itemView.findViewById(R.id.textUsedCount);
 
             }
         }

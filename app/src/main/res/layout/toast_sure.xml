@@ -3,27 +3,29 @@
     android:layout_height="wrap_content"
     android:background="@drawable/white_radius_10">
     <LinearLayout
-        android:layout_width="120dp"
-        android:layout_height="100dp"
-        android:gravity="center"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:padding="5dp"
         android:orientation="vertical"
-        android:background="@drawable/white_radius_10"
-        android:layout_gravity="center">
+        android:background="@drawable/white_radius_10">
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_toast_sure" />
 
         <TextView
-                android:id="@+id/sureTips"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/sureTips"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="内容！"
+            android:text="内容"
             android:textColor="#099A9F"
             android:textSize="15sp"
+            android:layout_gravity="center"
             android:ellipsize="end"/>
     </LinearLayout>
 </FrameLayout>

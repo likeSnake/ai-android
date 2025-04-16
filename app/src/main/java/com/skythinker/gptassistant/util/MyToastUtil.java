@@ -53,4 +53,12 @@ public class MyToastUtil {
     public static void setTextSize(float size){
         tipsText.setTextSize(size);
     }
+
+    public static Context getContext() {
+        return context;
+    }
+
+    public static void setContext(Context context) {
+        MyToastUtil.context = context;
+    }
 }

@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,7 @@ import com.skythinker.gptassistant.util.HttpUtils;
 import com.skythinker.gptassistant.util.MyToastUtil;
 import com.skythinker.gptassistant.util.MyUtil;
 import com.skythinker.gptassistant.util.PreferencesUtil;
+import com.skythinker.gptassistant.util.SmsCodeHelper;
 import com.tencent.mmkv.MMKV;
 
 import butterknife.BindView;
@@ -54,6 +56,8 @@ public class ChangePwdAct extends AppCompatActivity {
     EditText resetPasswordTwoED;
     @BindView(R.id.resetPCodeED)
     EditText resetPCodeED;
+    @BindView(R.id.resetPGetCodeBut)
+    Button resetPGetCodeBut;
 
     private String newPwd;
     private String reNewPwd;
@@ -100,13 +104,23 @@ public class ChangePwdAct extends AppCompatActivity {
         if (userPhone.isEmpty()){
             MyToastUtil.showSuccessful("请先输入手机号");
         }
+        resetPGetCodeBut.setEnabled(false);
+        resetPGetCodeBut.setClickable(false);
         mobile_code = String.valueOf((int)((Math.random()*9+1)*100000));
         String msgINfo = "&mobile="+userPhone+"&content=您的验证码是："+mobile_code+"。请不要把验证码泄露给其他人。";
         String urlString = API_MSG_SEND + msgINfo;
         sendGetRequestNormal(urlString, new HttpUtils.HttpCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                System.out.println(result);
+                new SmsCodeHelper(resetPGetCodeBut, 59).smsCodeGet(new SmsCodeHelper.SmsTimerCall() {
+                    @Override
+                    public void call(boolean finished) {
+                        if (finished){
+                            resetPGetCodeBut.setEnabled(true);
+                            resetPGetCodeBut.setClickable(true);
+                        }
+                    }
+                });
             }
 
             @Override

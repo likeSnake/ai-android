@@ -2,6 +2,8 @@ package com.skythinker.gptassistant.util;
 
 import static com.skythinker.gptassistant.util.MyUtil.APP_BASE_URL;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import java.io.IOException;
@@ -56,7 +58,12 @@ public class HttpUtils {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseString = response.body().string();
                 Log.d(TAG, "Response: " + responseString);
-                callback.onSuccess(responseString);
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onSuccess(responseString);
+                    }
+                });
 
             }
         });
@@ -90,8 +97,12 @@ public class HttpUtils {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseString = response.body().string();
                 Log.d(TAG, "Response: " + responseString);
-                callback.onSuccess(responseString);
-
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onSuccess(responseString);
+                    }
+                });
             }
         });
     }
@@ -130,7 +141,12 @@ public class HttpUtils {
                 if(response!=null) {
                     String responseString = response.body().string();
                     Log.d(TAG, "Response: " + responseString);
-                    callback.onSuccess(responseString);
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            callback.onSuccess(responseString);
+                        }
+                    });
                 }
             }
         });
@@ -163,7 +179,12 @@ public class HttpUtils {
                 if(response!=null) {
                     String responseString = response.body().string();
                     Log.d(TAG, "Response: " + responseString);
-                    callback.onSuccess(responseString);
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            callback.onSuccess(responseString);
+                        }
+                    });
                 }
             }
         });

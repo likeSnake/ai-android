@@ -4,6 +4,7 @@ import static com.skythinker.gptassistant.util.MyUtil.APP_APPINFO_URL;
 import static com.skythinker.gptassistant.util.MyUtil.APP_BASE_URL;
 import static com.skythinker.gptassistant.util.MyUtil.APP_LOGIN_URL;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_INFO_URL;
+import static com.skythinker.gptassistant.util.MyUtil.initLoading;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -53,6 +54,7 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         unbinder = ButterKnife.bind(this);
         initData();
+        initLoading(LoginActivity.this);
     }
 
     public void initData(){
@@ -77,14 +79,16 @@ public class LoginActivity extends AppCompatActivity{
         String userPwd = inputUserPwd.getText().toString().trim();
 
         User user = new User();
-        user.setUserName(userName);
+        user.setPhone_number(userName);
         user.setPassword(userPwd);
 
         String json = new Gson().toJson(user);
+        MyUtil.showLoading();
         HttpUtils.sendPostRequest(APP_LOGIN_URL, json, new HttpUtils.HttpCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 //BaseEntity baseEntity = new Gson().fromJson(result, BaseEntity.class);
+                MyUtil.hideLoading();
                 BaseEntity<MyToken> baseEntity = new Gson().fromJson(result, new TypeToken<BaseEntity<MyToken>>(){}.getType());
                 if (baseEntity.code != MyUtil.HTTP_CODE_SUCCESSFUL){
                     MyToastUtil.showError(baseEntity.msg);
@@ -102,6 +106,7 @@ public class LoginActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Exception e) {
+                MyUtil.hideLoading();
                 MyToastUtil.showError(e.getMessage());
             }
         });

@@ -71,18 +71,23 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onSuccess(String result) {
                 BaseEntity<MyToken> baseEntity = new Gson().fromJson(result, new TypeToken<BaseEntity<MyToken>>(){}.getType());
                 if (baseEntity == null){
-                    MyToastUtil.showError("返回为空");
+                    MyToastUtil.showError("登录状态过期，请重新登录");
+                    startLogin();
                     return;
                 }
                 if (baseEntity.code != MyUtil.HTTP_CODE_SUCCESSFUL){
-                    if (baseEntity.code == MyUtil.HTTP_CODE_TOKEN_OVERDUE){
+                    // token过期
+                    MyToastUtil.showSuccessful("登录状态过期，请重新登录");
+                    // 去登录
+                    startLogin();
+                    /*if (baseEntity.code == MyUtil.HTTP_CODE_TOKEN_OVERDUE){
                         // token过期
                         MyToastUtil.showSuccessful("登录状态过期，请重新登录");
                         // 去登录
                         startLogin();
                     }else {
                         MyToastUtil.showError(baseEntity.msg);
-                    }
+                    }*/
                 }else {
                     MyToken myToken = baseEntity.getData();
                     if (myToken == null){
