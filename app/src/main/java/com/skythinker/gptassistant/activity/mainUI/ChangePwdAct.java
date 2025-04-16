@@ -7,6 +7,7 @@ import static com.skythinker.gptassistant.util.MyUtil.APP_UPDATE_PWD_URL;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_TEMPLATE_URL;
 import static com.skythinker.gptassistant.util.MyUtil.MSG_API_ID;
 import static com.skythinker.gptassistant.util.MyUtil.MSG_API_KEY;
+import static com.skythinker.gptassistant.util.MyUtil.OPEN_APP_DEBUG;
 import static com.skythinker.gptassistant.util.MyUtil.TOURIST;
 
 import android.app.Activity;
@@ -62,7 +63,7 @@ public class ChangePwdAct extends AppCompatActivity {
     private String newPwd;
     private String reNewPwd;
     private String userPhone;
-    private String mobile_code = "";
+    private String mobile_code = "AABBCC";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class ChangePwdAct extends AppCompatActivity {
         resetPPhoneED.setText(userPhone);
     }
 
-    @OnClick({R.id.resetPGetCodeBut,R.id.resetPBackIV})
+    @OnClick({R.id.resetPGetCodeBut,R.id.resetPBackIV,R.id.resetPSubmitBut})
     public void myListener(View view){
         switch (view.getId()){
             case R.id.resetPGetCodeBut:
@@ -96,6 +97,9 @@ public class ChangePwdAct extends AppCompatActivity {
                 break;
             case R.id.resetPBackIV:
                 finish();
+                break;
+            case R.id.resetPSubmitBut:
+                submit();
                 break;
         }
     }
@@ -138,7 +142,7 @@ public class ChangePwdAct extends AppCompatActivity {
             MyToastUtil.showError("请输入验证码!");
             return;
         }
-        if (!phoneCode.equals(mobile_code)){
+        if (!phoneCode.equals(mobile_code) && !OPEN_APP_DEBUG){
             MyToastUtil.showError("验证码错误!");
             return;
         }

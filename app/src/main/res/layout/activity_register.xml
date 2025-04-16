@@ -34,7 +34,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/icon"/>
+                android:src="@mipmap/icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,27 +63,39 @@
             android:textColor="#6A6969"
             android:textSize="14sp"
             />
-
-        <EditText
-            android:id="@+id/inputUserPwd"
+        <!-- 密码 -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputPwdLayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/inputUserName"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="输入密码"
-            android:inputType="textPassword"
-            android:background="@drawable/random_sharp"
-            android:textColor="#6A6969"
-            android:textSize="14sp"
+            android:layout_below="@+id/inputUserName"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"/>
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="8dp"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/inputUserPwd"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="输入密码"
+                android:digits="@string/input_number_english"
+                android:inputType="textPassword"
+                android:background="@drawable/random_sharp"
+                android:textColor="#6A6969"
+                android:textSize="14sp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <EditText
             android:id="@+id/inputPhone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@+id/inputUserPwd"
+            android:layout_below="@+id/inputPwdLayout"
             android:layout_marginTop="10dp"
+            android:maxLength="11"
             android:hint="手机号"
             android:inputType="phone"
             android:background="@drawable/random_sharp"

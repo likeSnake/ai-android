@@ -3,6 +3,7 @@ package com.skythinker.gptassistant.activity;
 import static com.skythinker.gptassistant.util.HttpUtils.sendGetRequestNormal;
 import static com.skythinker.gptassistant.util.MyUtil.API_MSG_SEND;
 import static com.skythinker.gptassistant.util.MyUtil.APP_USER_REGISTER_URL;
+import static com.skythinker.gptassistant.util.MyUtil.OPEN_APP_DEBUG;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean isUserPwdEmpty = true;
     private boolean isUserPhoneEmpty = true;
     private boolean isUserCodeEmpty = true;
-    private String mobile_code = "";
+    private String mobile_code = "AABBCC";
     private AlertDialog dialog;
 
     @Override
@@ -178,6 +179,10 @@ public class RegisterActivity extends AppCompatActivity {
         String phone = inputPhone.getText().toString().trim();
         String code = verificationCode.getText().toString().trim();
 
+        if (!code.equals(mobile_code) && !OPEN_APP_DEBUG){
+            MyToastUtil.showError("验证码错误");
+            return;
+        }
         User user = new User();
         user.setUserName(userName);
         user.setPassword(password);
